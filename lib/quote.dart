@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,9 +14,10 @@ class Quote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 220,
-      margin: EdgeInsets.all(8),
+      height: 200,
+      margin: EdgeInsets.all(6),
       child: Card(
+        elevation: 4,
         child: InkWell(
           onTap: () async => {
             if (await canLaunch(link) != null) {
@@ -23,25 +25,19 @@ class Quote extends StatelessWidget {
             }
           },
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.all(4),
-                child: Text(
+                padding: EdgeInsets.all(8),
+                child: AutoSizeText(
                   quoteText,
-                  overflow: TextOverflow.clip,
-                  style: TextStyle(fontSize: 22),
-                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 24),
+                  maxLines: 5,
                 ),
-              ),
-              const Divider(
-                indent: 20,
-                endIndent: 20,
               ),
               Text(
                 credits,
                 style: TextStyle(fontSize: 14),
-                textAlign: TextAlign.right,
               ),
             ],
           ),

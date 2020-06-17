@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vegan_daily_quote/calendar.dart';
 import 'package:vegan_daily_quote/quote.dart';
-import 'package:vegan_daily_quote/quotes.dart';
-import 'package:intl/intl.dart';
-import 'dart:math';
+import 'package:vegan_daily_quote/quotes_store.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +21,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   final String title;
+  final _quotes = QuotesStore.random();
 
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -31,22 +30,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Quotes> _quotes;
-  final _dayOfYear = new Random().nextInt(9); //int.parse(DateFormat("D").format(DateTime.now())) % 3;
-
-  Future<List<Quotes>> fetchQuotes(BuildContext context) async {
-    final jsonString =
-        await DefaultAssetBundle.of(context).loadString('assets/quotes.json');
-    return quotesFromJson(jsonString);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        actions: [
+        actions: [          
           IconButton(
+            tooltip: 'Refresh',
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              setState(() {
+                widget._quotes.random();  
+              });                        
+            },
+          ),
+          IconButton(
+            tooltip: 'Settings',
+            icon: const Icon(Icons.settings),
+            onPressed: () {                       
+            },
+          ),
+          IconButton(
+            tooltip: 'About',
             icon: const Icon(Icons.info),
             onPressed: () {
               showAboutDialog(
@@ -64,20 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Calender(),
-          FutureBuilder(
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  _quotes = snapshot.data;
-                  return Quote(
-                    quoteText: _quotes[_dayOfYear].quote,
-                    credits: _quotes[_dayOfYear].credits,
-                    link: _quotes[_dayOfYear].link,
-                  );
-                } else {
-                  return CircularProgressIndicator();
-                }
-              },
-              future: fetchQuotes(context)),
+          Quote(
+            quoteText: widget._quotes.quote['quote'],
+            credits: widget._quotes.quote['credits'],
+            link: widget._quotes.quote['link'],
+          ),
         ],
       ),
     );
