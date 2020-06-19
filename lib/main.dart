@@ -70,11 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Calender(),
-          Quote(
-            quoteText: widget._quotes.quote['quote'],
-            credits: widget._quotes.quote['credits'],
-            link: widget._quotes.quote['link'],
-          ),
+          Quote(quoteStore: widget._quotes), 
         ],
       ),
     );
