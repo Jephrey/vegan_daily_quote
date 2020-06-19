@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vegan_daily_quote/bottom_bar.dart';
 import 'package:vegan_daily_quote/calendar.dart';
 import 'package:vegan_daily_quote/quote.dart';
 import 'package:vegan_daily_quote/quotes_store.dart';
@@ -71,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           Calender(),
           Quote(quoteStore: widget._quotes), 
+          BottomBar(quoteStore: widget._quotes),
         ],
       ),
     );
