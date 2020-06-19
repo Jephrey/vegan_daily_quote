@@ -107,13 +107,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  focused_menu:
-    dependency: "direct main"
-    description:
-      name: focused_menu
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   image:
     dependency: transitive
     description:
@@ -177,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
+  share:
+    dependency: "direct main"
+    description:
+      name: share
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.4+2"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -265,7 +265,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.4.10"
+    version: "5.4.11"
   url_launcher_macos:
     dependency: transitive
     description:

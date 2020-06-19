@@ -8,7 +8,7 @@ class QuotesStore {
   final _favList = 'favList';
 
   int _day;
-  int _max = _quotes.indexWhere((e) => e['quote'] == '') + 1;
+  int _max = _quotes.indexWhere((e) => e['quote'] == '');
   List<int> _favorites;
 
   Map<String, String> get quote => _quotes[_day];

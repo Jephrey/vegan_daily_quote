@@ -28,16 +28,26 @@ class Calender extends StatelessWidget {
                   maxLines: 1,
                   // textAlign: TextAlign.center,
                 ),
-                const Divider(thickness: 3,),
+                const Divider(
+                  thickness: 3,
+                ),
                 AutoSizeText(
                   day,
-                  style: TextStyle(fontSize: 60, color: Colors.red, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 60,
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                   maxFontSize: 70,
                 ),
               ],
             ),
           ),
+        ),
+        Container(
+          width: 120.0,
+          height: 120.0,
+          margin: EdgeInsets.all(4),
         ),
       ],
     );
