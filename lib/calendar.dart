@@ -10,8 +10,13 @@ class Calender extends StatelessWidget {
     var day = DateFormat.d().format(today.toLocal());
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        Container(
+          width: 120.0,
+          height: 120.0,
+          margin: EdgeInsets.all(4),
+        ),
         Container(
           width: 120.0,
           height: 120.0,
@@ -20,7 +25,7 @@ class Calender extends StatelessWidget {
             color: Colors.white,
             elevation: 4,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 AutoSizeText(
                   month,
@@ -39,6 +44,11 @@ class Calender extends StatelessWidget {
             ),
           ),
         ),
+        Container(
+          width: 100.0,
+          height: 120.0,
+          margin: EdgeInsets.all(4),
+        )
       ],
     );
   }
