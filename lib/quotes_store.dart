@@ -1,26 +1,54 @@
 import 'package:intl/intl.dart';
 import 'dart:math';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class QuotesStore {
 
+  final _favList = 'favList';
+
   int _day;
+  int _max = _quotes.indexWhere((e) => e['quote'] == '') + 1;
+  List<int> _favorites;
+
   Map<String, String> get quote => _quotes[_day];
 
+  void savePreferences() async {
+    List<String> strList = _favorites.map((i) => i.toString()).toList();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList(_favList, strList);
+  }
+
+  void getPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> savedStrList = prefs.getStringList(_favList);
+    if (savedStrList == null) {
+      _favorites = [];
+    } else {
+      _favorites = savedStrList.map((i)=> int.parse(i)).toList();
+    }
+  }
+
+  void init() {
+    getPreferences();
+  }
+
   QuotesStore() {
-    _day = int.parse(DateFormat("D").format(DateTime.now()));
+    _day = int.parse(DateFormat("D").format(DateTime.now())) % _max;
+    init();
   }
 
   QuotesStore.random() {
     random();
+    init();
   }
 
   void set(int day) {
-    if (day > 0 && day < _quotes.length) _day = day;
+    if (day > 0 && day < _max) _day = day;
   }
 
   void random() {
-    int i = _quotes.indexWhere((e) => e['quote'] == '');
-    _day = new Random().nextInt(_quotes.length + 1) % i;
+    _day = new Random().nextInt(_max) % _max;
   }
 
   void next() {
@@ -35,7 +63,29 @@ class QuotesStore {
     }
   }
 
-  final _quotes = const
+  void toggleFavorite() {
+    if (_favorites.contains(_day)) {
+      _favorites.remove(_day); 
+    } else {
+      _favorites.add(_day);       
+    }
+    savePreferences();
+  }
+
+  bool isFavorite() {
+    if (_favorites == null) return false;
+    return _favorites.contains(_day);
+  }
+
+  void addToFavorites() {
+    if (!_favorites.contains(_day)) _favorites.add(_day);
+  }
+
+  void removeFromFavorites() {
+    _favorites.remove(_day);
+  }
+
+  static const _quotes = const
     [
       {
           "quote": "No animal needs to die in order for me to live. And that makes me feel good.",

@@ -26,6 +26,8 @@ dependencies:
   intl: ^0.16.1
   url_launcher: ^5.4.10
   auto_size_text: ^2.1.0
+  focused_menu: ^1.0.0
+  shared_preferences: ^0.5.7+3
 
 
   # The following adds the Cupertino Icons font to your application.
