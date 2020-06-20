@@ -1,88 +1,79 @@
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class QuotesStore {
+class QuotesStore extends RxController {
+  final _favList = 'favList'; // Shared Prefences key.
 
-  final _favList = 'favList';
+  // Observable variables.
+  var _day = 0.obs; // Current day of the year.
+  var _favorites = [].obs; // Integer list with favorite quotes.
 
-  int _day;
-  int _max = _quotes.indexWhere((e) => e['quote'] == '');
-  List<int> _favorites;
+  int _max = _quotes.indexWhere((e) => e['quote'] == ''); // Find max quotes (until we have 366...).
+  
+  String get quote => _quotes[_day.value]['quote'];
+  String get credits => _quotes[_day.value]['credits'];
+  String get link => _quotes[_day.value]['link'];
+  bool get isFavorite => _favorites.value.contains(_day.value);
 
-  Map<String, String> get quote => _quotes[_day];
-
-  void savePreferences() async {
-    List<String> strList = _favorites.map((i) => i.toString()).toList();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(_favList, strList);
-  }
-
-  void getPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> savedStrList = prefs.getStringList(_favList);
-    if (savedStrList == null) {
-      _favorites = [];
-    } else {
-      _favorites = savedStrList.map((i)=> int.parse(i)).toList();
-    }
-  }
-
-  void init() {
-    getPreferences();
-  }
+  SharedPreferences _prefs; // To store the list of favorites.
 
   QuotesStore() {
-    _day = int.parse(DateFormat("D").format(DateTime.now())) % _max;
     init();
+    _day.value = int.parse(DateFormat("D").format(DateTime.now())) % _max;
   }
 
   QuotesStore.random() {
-    random();
     init();
+    random();
   }
 
-  void set(int day) {
-    if (day > 0 && day < _max) _day = day;
+  void init() async {
+    _prefs = await SharedPreferences.getInstance();
+    getPreferences();
+  }
+
+  void savePreferences() async {
+    List<String> strList = _favorites.map((i) => i.toString()).toList();
+    _prefs.setStringList(_favList, strList);
+  }
+
+  void getPreferences() async {
+    List<String> savedStrList = _prefs.getStringList(_favList);
+    if (savedStrList != null) {
+      _favorites.value = savedStrList.map((i)=> int.parse(i)).toSet().toList(); // Also remove any duplicates.
+    }
+  }
+
+  void set(int newDay) {
+    if (newDay > 0 && newDay <= _max) _day.value = newDay;
   }
 
   void random() {
-    _day = new Random().nextInt(_max) % _max;
+    _day.value = new Random().nextInt(_max) % _max;
   }
 
   void next() {
-    if (_day < _quotes.length) {
-      _day += 1;
+    if (_day.value < _quotes.length) {
+      _day.value += 1;
     }    
   }
 
   void prev() {
-    if (_day > 0) {
-      _day -= 1;
+    if (_day.value > 0) {
+      _day.value -= 1;
     }
   }
 
   void toggleFavorite() {
-    if (_favorites.contains(_day)) {
-      _favorites.remove(_day); 
+    if (_favorites.contains(_day.value)) {
+      _favorites.remove(_day.value); 
     } else {
-      _favorites.add(_day);       
+      _favorites.add(_day.value);       
     }
     savePreferences();
-  }
-
-  bool isFavorite() {
-    if (_favorites == null) return false;
-    return _favorites.contains(_day);
-  }
-
-  void addToFavorites() {
-    if (!_favorites.contains(_day)) _favorites.add(_day);
-  }
-
-  void removeFromFavorites() {
-    _favorites.remove(_day);
   }
 
   static const _quotes = const
