@@ -10,10 +10,15 @@ class Calender extends StatelessWidget {
     var day = DateFormat.d().format(today.toLocal());
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          width: 120.0,
+          width: MediaQuery.of(context).size.width * 0.3,
+          height: 120.0,
+          margin: EdgeInsets.all(4),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.3,
           height: 120.0,
           margin: EdgeInsets.all(4),
           child: Card(
@@ -45,7 +50,7 @@ class Calender extends StatelessWidget {
           ),
         ),
         Container(
-          width: 120.0,
+          width: MediaQuery.of(context).size.width * 0.3,
           height: 120.0,
           margin: EdgeInsets.all(4),
         ),
