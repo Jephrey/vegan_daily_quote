@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import 'package:vegan_daily_quote/theme_controller.dart';
 
-
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

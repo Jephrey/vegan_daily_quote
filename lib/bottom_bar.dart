@@ -18,16 +18,17 @@ class BottomBar extends StatelessWidget {
         Tooltip(
           message: 'Copy Quote',
           child: FlatButton(
-              onPressed: () {
-                // Copy quote, credits and link to the clipboard.
-                Clipboard.setData(new ClipboardData(
-                        text: '${qs.quote}\n${qs.credits}\n${qs.link}'))
-                    .then((_) {
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(content: Text("Quote copied to clipboard")));
-                });
-              },
-              child: Icon(Icons.content_copy)),
+            onPressed: () {
+              // Copy quote, credits and link to the clipboard.
+              Clipboard.setData(new ClipboardData(
+                      text: '${qs.quote}\n${qs.credits}\n${qs.link}'))
+                  .then((_) {
+                Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text("Quote copied to clipboard")));
+              });
+            },
+            child: Icon(Icons.content_copy),
+          ),
         ),
         if (!kIsWeb)
           Tooltip(
@@ -43,10 +44,11 @@ class BottomBar extends StatelessWidget {
         Tooltip(
           message: 'Open link',
           child: FlatButton(
-              onPressed: () async => {
-                    if (await canLaunch(qs.link)) {await launch(qs.link)}
-                  },
-              child: Icon(Icons.link)),
+            onPressed: () async => {
+              if (await canLaunch(qs.link)) {await launch(qs.link)}
+            },
+            child: Icon(Icons.link),
+          ),
         ),
         Tooltip(
           message: 'Toggle favorite',
@@ -62,7 +64,6 @@ class BottomBar extends StatelessWidget {
                     )
                   : Icon(
                       Icons.favorite_border,
-                      color: Colors.grey,
                     ),
             ),
           ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,8 +22,7 @@ class ThemeController extends RxController {
     prefs = await SharedPreferences.getInstance();
     String themeText = prefs.getString('theme') ?? 'system';
     try {
-      themeMode =
-          ThemeMode.values.firstWhere((e) => describeEnum(e) == themeText);
+      themeMode = ThemeMode.values.firstWhere((e) => describeEnum(e) == themeText);
     } catch (e) {
       themeMode = ThemeMode.system;
     }

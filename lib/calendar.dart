@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vegan_daily_quote/theme_controller.dart';
 
 class Calender extends StatelessWidget {
   @override
@@ -29,13 +30,17 @@ class Calender extends StatelessWidget {
               children: [
                 AutoSizeText(
                   month,
-                  style: TextStyle(fontSize: 16,
-                  color: Theme.of(context).indicatorColor),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: ThemeData.fallback().textTheme.headline1.color,
+                    fontWeight: FontWeight.bold,
+                  ),
                   maxLines: 1,
                   // textAlign: TextAlign.center,
                 ),
                 const Divider(
                   thickness: 3,
+                  color: Colors.black12,
                 ),
                 AutoSizeText(
                   day,
