@@ -1,24 +1,35 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:vegan_daily_quote/bottom_bar.dart';
 import 'package:vegan_daily_quote/calendar.dart';
 import 'package:vegan_daily_quote/quote.dart';
 import 'package:vegan_daily_quote/quotes_store.dart';
+import 'package:vegan_daily_quote/settings.dart';
+import 'package:vegan_daily_quote/theme_controller.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.lazyPut<ThemeController>(() => ThemeController());
+  Get.lazyPut<QuotesStore>(() => QuotesStore());
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   final QuotesStore qs = Get.put(QuotesStore.random());
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Vegan Daily Quote',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    ThemeController.to.getThemeModeFromPreferences();
+    return Obx(
+      () => GetMaterialApp(
+        title: 'Vegan Daily Quote',
+        theme: ThemeData.light().copyWith(primaryColor: Colors.lightGreen),
+        darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.green),
+        themeMode: ThemeController.to.theme.value,
+        home: Home(title: 'Vegan Daily Quote'),
       ),
-      home: Home(title: 'Vegan Daily Quote'),
     );
   }
 }
@@ -26,7 +37,6 @@ class MyApp extends StatelessWidget {
 class Home extends StatelessWidget {
   final String title;
   final QuotesStore qs = Get.find();
-
   Home({Key key, this.title}) : super(key: key);
 
   @override
@@ -34,18 +44,19 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        actions: [          
+        actions: [
           IconButton(
             tooltip: 'Refresh',
             icon: const Icon(Icons.refresh),
             onPressed: () {
-                qs.random();  
+              qs.random();
             },
           ),
           IconButton(
             tooltip: 'Settings',
             icon: const Icon(Icons.settings),
-            onPressed: () {                       
+            onPressed: () {
+              Get.to(SettingsPage());
             },
           ),
           IconButton(
@@ -67,7 +78,7 @@ class Home extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Calender(),
-          Quote(), 
+          Quote(),
           BottomBar(),
         ],
       ),
