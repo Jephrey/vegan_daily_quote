@@ -10,7 +10,9 @@ import 'package:vegan_daily_quote/settings.dart';
 import 'package:vegan_daily_quote/theme_controller.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.lazyPut<ThemeController>(() => ThemeController());
+  Get.lazyPut<QuotesStore>(() => QuotesStore());
   runApp(MyApp());
 }
 
@@ -39,9 +41,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //ThemeController.to.setThemeMode(ThemeMode.dark);
-    //print('${Theme.of(context).brightness}');
-
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
