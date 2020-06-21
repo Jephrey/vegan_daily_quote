@@ -29,7 +29,8 @@ class Calender extends StatelessWidget {
               children: [
                 AutoSizeText(
                   month,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16,
+                  color: Theme.of(context).indicatorColor),
                   maxLines: 1,
                   // textAlign: TextAlign.center,
                 ),
