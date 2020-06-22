@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'package:vegan_daily_quote/bottom_bar.dart';
 import 'package:vegan_daily_quote/calendar.dart';
+import 'package:vegan_daily_quote/notifications.dart';
 import 'package:vegan_daily_quote/preferences.dart';
 import 'package:vegan_daily_quote/quote.dart';
 import 'package:vegan_daily_quote/quotes_store.dart';
@@ -16,7 +17,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Get.lazyPut<ThemeController>(() => ThemeController());
   Get.lazyPut<QuotesStore>(() => QuotesStore());
-  Get.lazyPut<Preferences>(() => Preferences());
+  Get.put(Preferences());
+  Get.put(Notifications());
   runApp(MyApp());
 }
 
@@ -47,70 +49,11 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
   final QuotesStore qs = Get.put(QuotesStore.random());
 
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  var initializationSettingsAndroid;
-  var initializationSettingsIOS;
-  var initializationSettings;
-
-  Future<void> _quoteNotification() async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'channel id', 'channel name', 'channel description',
-        importance: Importance.None,
-        priority: Priority.Low,
-        ticker: 'vdq ticker');
-    var iOSChannelSpecifics = IOSNotificationDetails();
-    var notificationDetails = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.showDailyAtTime(
-        0,
-        'Quote by ${QuotesStore.to.credits}',
-        QuotesStore.to.quote,
-        Time(12),
-        notificationDetails,
-        payload: 'vdq payload');
-  }
-
   @override
   void initState() {
     super.initState();
-    initializationSettingsAndroid = AndroidInitializationSettings('icon');
-    initializationSettingsIOS = IOSInitializationSettings(
-        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
-    initializationSettings = new InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
 
-    _quoteNotification();
-  }
-
-  Future onSelectNotification(String payload) async {
-    if (payload != null) {
-      debugPrint('Notification payload: $payload');
-    }
-  }
-
-  Future onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) => CupertinoAlertDialog(
-              title: Text(title),
-              content: Text(body),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  child: Text('Ok'),
-                  onPressed: () async {
-                    Navigator.of(context, rootNavigator: true).pop();
-                    await Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => null));
-                  },
-                )
-              ],
-            ));
+    Notifications.to.setNotification();
   }
 
   @override
