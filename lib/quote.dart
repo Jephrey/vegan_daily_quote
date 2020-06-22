@@ -10,39 +10,39 @@ class Quote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: double.infinity,
-        margin: EdgeInsets.all(6),
-        child: Card(
-          elevation: 4,
-          child: InkWell(
-            onTap: () async => {
-              if (await canLaunch(qs.link)) {await launch(qs.link)}
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
-                    child: Obx(() => AutoSizeText(
-                          qs.quote,
-                          style: TextStyle(fontSize: 24),
-                          maxLines: 10,
-                        )),
-                  ),
+    return Container(
+      margin: EdgeInsets.all(4),
+      child: Card(
+        elevation: 4,
+        child: InkWell(
+          onTap: () async => {
+            if (await canLaunch(qs.link)) {await launch(qs.link)}
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 7,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Obx(() => AutoSizeText(
+                        qs.quote,
+                        minFontSize: 12,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 24),
+                        maxLines: 8,
+                      )),
                 ),
-                Obx(() => Text(
+              ),
+              Obx(() => Expanded(
+                    flex: 1,
+                    child: Text(
                       '~ ${qs.credits} ~',
                       style:
                           TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
+                    ),
+                  )),
+            ],
           ),
         ),
       ),

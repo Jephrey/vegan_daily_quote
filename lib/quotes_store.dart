@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class QuotesStore extends RxController {
+  static QuotesStore get to => Get.find();
+  
   final _favList = 'favList'; // Shared Prefences key.
 
   // Observable variables.
