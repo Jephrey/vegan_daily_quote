@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'package:vegan_daily_quote/bottom_bar.dart';
 import 'package:vegan_daily_quote/calendar.dart';
+import 'package:vegan_daily_quote/preferences.dart';
 import 'package:vegan_daily_quote/quote.dart';
 import 'package:vegan_daily_quote/quotes_store.dart';
 import 'package:vegan_daily_quote/settings.dart';
@@ -15,21 +16,21 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Get.lazyPut<ThemeController>(() => ThemeController());
   Get.lazyPut<QuotesStore>(() => QuotesStore());
+  Get.lazyPut<Preferences>(() => Preferences());
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final QuotesStore qs = Get.put(QuotesStore.random());
-
   @override
   Widget build(BuildContext context) {
-    ThemeController.to.getThemeModeFromPreferences();
+    ThemeController.to.getThemeMode();
+    const _appTitle = 'Vegan Daily Quote';
     return GetMaterialApp(
-      title: 'Vegan Daily Quote',
+      title: _appTitle,
       theme: ThemeData.light().copyWith(primaryColor: Colors.lightGreen),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.green),
       themeMode: ThemeController.to.theme.value,
-      home: MyHome(title: 'Vegan Daily Quote'),
+      home: MyHome(title: _appTitle),
     );
   }
 }
@@ -44,7 +45,7 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  final QuotesStore qs = Get.find();
+  final QuotesStore qs = Get.put(QuotesStore.random());
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();

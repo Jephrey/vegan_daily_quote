@@ -1,26 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vegan_daily_quote/preferences.dart';
 
 class ThemeController extends RxController {
-  static ThemeController get to => Get.find();
-
-  SharedPreferences prefs;
+  static ThemeController get to => Get.find<ThemeController>();
+  
   var theme = ThemeMode.dark.obs;
   ThemeMode get themeMode => theme.value;
 
-  Future<void> setThemeMode(ThemeMode themeMode) async {
+  setThemeMode(ThemeMode themeMode) {
     Get.changeThemeMode(themeMode);
     theme.value = themeMode;
-    prefs = await SharedPreferences.getInstance();
-    await prefs.setString('theme', themeMode.toString().split('.')[1]);
+    Preferences.to.theme = themeMode.toString().split('.')[1];
   }
 
-  getThemeModeFromPreferences() async {
+  getThemeMode() {
     ThemeMode themeMode;
-    prefs = await SharedPreferences.getInstance();
-    String themeText = prefs.getString('theme') ?? 'system';
+    String themeText = Preferences.to.theme;
     try {
       themeMode = ThemeMode.values.firstWhere((e) => describeEnum(e) == themeText);
     } catch (e) {

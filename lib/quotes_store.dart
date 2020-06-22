@@ -2,12 +2,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vegan_daily_quote/preferences.dart';
 
 class QuotesStore extends RxController {
-  static QuotesStore get to => Get.find();
-  
-  final _favList = 'favList'; // Shared Prefences key.
+  static QuotesStore get to => Get.find<QuotesStore>();
 
   // Observable variables.
   var _day = 0.obs; // Current day of the year.
@@ -20,33 +18,24 @@ class QuotesStore extends RxController {
   String get link => _quotes[_day.value]['link'];
   bool get isFavorite => _favorites.value.contains(_day.value);
 
-  SharedPreferences _prefs; // To store the list of favorites.
-
   QuotesStore() {
-    init();
+    getPreferences();
     _day.value = int.parse(DateFormat("D").format(DateTime.now())) % _max;
   }
 
   QuotesStore.random() {
-    init();
+    getPreferences();
     random();
   }
 
-  void init() async {
-    _prefs = await SharedPreferences.getInstance();
-    getPreferences();
+  void savePreferences() {
+    List<String> favList = _favorites.map((i) => i.toString()).toList(); // Convert  int to string list.
+    Preferences.to.favorites = favList;
   }
 
-  void savePreferences() async {
-    List<String> strList = _favorites.map((i) => i.toString()).toList();
-    _prefs.setStringList(_favList, strList);
-  }
-
-  void getPreferences() async {
-    List<String> savedStrList = _prefs.getStringList(_favList);
-    if (savedStrList != null) {
-      _favorites.value = savedStrList.map((i)=> int.parse(i)).toSet().toList(); // Also remove any duplicates.
-    }
+  void getPreferences() {
+    List<String> savedStrList = Preferences.to.favorites;
+    _favorites.value = savedStrList.map((i)=> int.parse(i)).toSet().toList(); // Also remove any duplicates.    
   }
 
   void set(int newDay) {
@@ -54,18 +43,22 @@ class QuotesStore extends RxController {
   }
 
   void random() {
-    _day.value = new Random().nextInt(_max) % _max;
+    _day.value = new Random().nextInt(_max + 1) % _max;
   }
 
   void next() {
-    if (_day.value < _quotes.length) {
+    if (_day.value < _max) {
       _day.value += 1;
-    }    
+    } else {
+      _day.value = 0;
+    }
   }
 
   void prev() {
     if (_day.value > 0) {
       _day.value -= 1;
+    } else {
+      _day.value = _max - 1;
     }
   }
 
@@ -146,8 +139,8 @@ class QuotesStore extends RxController {
           "link": "https://en.wikipedia.org/wiki/Mahatma_Gandhi"
       },
       {
-          "quote": "",
-          "credits": "",
+          "quote": "Empty test quote",
+          "credits": "Jeffrey Rusterholz",
           "link": ""
       },
       {

@@ -20,6 +20,7 @@ class Quote extends StatelessWidget {
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 flex: 7,
@@ -36,10 +37,12 @@ class Quote extends StatelessWidget {
               ),
               Obx(() => Expanded(
                     flex: 1,
-                    child: Text(
-                      '~ ${qs.credits} ~',
-                      style:
-                          TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+                    child: Center(
+                      child: Text(
+                        '~ ${qs.credits} ~',
+                        style: TextStyle(
+                            fontSize: 14, fontStyle: FontStyle.italic),
+                      ),
                     ),
                   )),
             ],

@@ -44,9 +44,13 @@ class BottomBar extends StatelessWidget {
         Tooltip(
           message: 'Open link',
           child: FlatButton(
-            onPressed: () async => {
-              if (await canLaunch(qs.link)) {await launch(qs.link)}
-            },
+            // Enable button if there is a link. Null disables the button.
+            onPressed: qs.link != '' ?
+             () async => {
+              if (qs.link != '') {
+                if (await canLaunch(qs.link)) await launch(qs.link)
+              }
+            }: null,
             child: Icon(Icons.link),
           ),
         ),
