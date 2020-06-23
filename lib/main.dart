@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:i18n_extension/i18n_widget.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:vegan_daily_quote/bottom_bar.dart';
 import 'package:vegan_daily_quote/calendar.dart';
@@ -13,12 +14,14 @@ import 'package:vegan_daily_quote/quotes_store.dart';
 import 'package:vegan_daily_quote/settings.dart';
 import 'package:vegan_daily_quote/theme_controller.dart';
 
+import 'main.i18n.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Get.lazyPut<ThemeController>(() => ThemeController());
   Get.lazyPut<QuotesStore>(() => QuotesStore());
   Get.put(Preferences());
-  Get.put(Notifications());
+  if (!kIsWeb) Get.put(Notifications());
   runApp(MyApp());
 }
 
@@ -28,11 +31,21 @@ class MyApp extends StatelessWidget {
     ThemeController.to.getThemeMode();
     const _appTitle = 'Vegan Daily Quote';
     return GetMaterialApp(
+      localizationsDelegates: [            
+               GlobalMaterialLocalizations.delegate,
+               GlobalWidgetsLocalizations.delegate,
+               GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+               const Locale('en', "US"), 
+               const Locale('nl', "NL"),
+               const Locale('de', "DE"),
+            ],
       title: _appTitle,
       theme: ThemeData.light().copyWith(primaryColor: Colors.lightGreen),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.green),
       themeMode: ThemeController.to.theme.value,
-      home: MyHome(title: _appTitle),
+      home: I18n(child: MyHome(title: _appTitle)),
     );
   }
 }
@@ -53,7 +66,7 @@ class _MyHomeState extends State<MyHome> {
   void initState() {
     super.initState();
 
-    Notifications.to.setNotification();
+    if (!kIsWeb) Notifications.to.setNotification();
   }
 
   @override
@@ -63,21 +76,21 @@ class _MyHomeState extends State<MyHome> {
         title: Text(widget.title),
         actions: [
           IconButton(
-            tooltip: 'Refresh',
+            tooltip: 'Refresh'.i18n,
             icon: const Icon(Icons.repeat),
             onPressed: () {
               qs.random();
             },
           ),
           IconButton(
-            tooltip: 'Settings',
+            tooltip: 'Settings'.i18n,
             icon: const Icon(Icons.settings),
             onPressed: () {
               Get.to(SettingsPage());
             },
           ),
           IconButton(
-            tooltip: 'About',
+            tooltip: 'About'.i18n,
             icon: const Icon(Icons.info),
             onPressed: () {
               showAboutDialog(

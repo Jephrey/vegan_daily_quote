@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
+
 import 'package:vegan_daily_quote/quotes_store.dart';
+
+import 'bottom_bar.i18n.dart';
 
 class BottomBar extends StatelessWidget {
   final QuotesStore qs = Get.find();
@@ -16,7 +19,7 @@ class BottomBar extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         Tooltip(
-          message: 'Copy Quote',
+          message: 'Copy Quote'.i18n,
           child: FlatButton(
             onPressed: () {
               // Copy quote, credits and link to the clipboard.
@@ -24,7 +27,7 @@ class BottomBar extends StatelessWidget {
                       text: '${qs.quote}\n${qs.credits}\n${qs.link}'))
                   .then((_) {
                 Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text("Quote copied to clipboard")));
+                    SnackBar(content: Text("Quote copied to clipboard".i18n)));
               });
             },
             child: Icon(Icons.content_copy),
@@ -32,7 +35,7 @@ class BottomBar extends StatelessWidget {
         ),
         if (!kIsWeb)
           Tooltip(
-            message: 'Share Quote',
+            message: 'Share Quote'.i18n,
             child: FlatButton(
               onPressed: () {
                 Share.share('${qs.quote}\n${qs.credits}\n',
@@ -42,7 +45,7 @@ class BottomBar extends StatelessWidget {
             ),
           ),
         Tooltip(
-          message: 'Open link',
+          message: 'Open link'.i18n,
           child: FlatButton(
             // Enable button if there is a link. Null disables the button.
             onPressed: qs.link != '' ?
@@ -55,7 +58,7 @@ class BottomBar extends StatelessWidget {
           ),
         ),
         Tooltip(
-          message: 'Toggle favorite',
+          message: 'Toggle favorite'.i18n,
           child: FlatButton(
             onPressed: () {
               qs.toggleFavorite();

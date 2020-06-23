@@ -2,11 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'calendar.i18n.dart';
+
 class Calender extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var today = DateTime.now();
-    var month = DateFormat.MMMM().format(today.toLocal()).toUpperCase();
+    var month = DateFormat.MMMM().format(today.toLocal()).toUpperCase().i18n;
     var day = DateFormat.d().format(today.toLocal());
 
     return Container(

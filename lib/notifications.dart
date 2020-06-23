@@ -17,8 +17,8 @@ class Notifications {
   Future<void> setNotification() async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'channel id', 'channel name', 'channel description',
-        importance: Importance.None,
-        priority: Priority.Low,
+        importance: Importance.Default,
+        priority: Priority.Default,
         ticker: 'VQD ticker');
     var notificationDetails = NotificationDetails(
         androidPlatformChannelSpecifics, null);

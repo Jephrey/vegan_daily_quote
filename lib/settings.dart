@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegan_daily_quote/notifications.dart';
 import 'package:vegan_daily_quote/preferences.dart';
 
 import 'package:vegan_daily_quote/theme_controller.dart';
+
+import 'settings.i18n.dart';
 
 class SettingsPage extends StatelessWidget {
   Future<TimeOfDay> selectTime(BuildContext context) async {
@@ -19,7 +22,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text('Settings'.i18n),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -28,12 +31,12 @@ class SettingsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Theme Mode',
+                'Theme Mode'.i18n,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
               RadioListTile(
-                title: Text('System'),
+                title: Text('System'.i18n),
                 value: ThemeMode.system,
                 groupValue: ThemeController.to.themeMode,
                 onChanged: (value) {
@@ -41,7 +44,7 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               RadioListTile(
-                title: Text('Dark'),
+                title: Text('Dark'.i18n),
                 value: ThemeMode.dark,
                 groupValue: ThemeController.to.themeMode,
                 onChanged: (value) {
@@ -49,20 +52,22 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               RadioListTile(
-                  title: Text('Light'),
+                  title: Text('Light'.i18n),
                   value: ThemeMode.light,
                   groupValue: ThemeController.to.themeMode,
                   onChanged: (value) {
                     ThemeController.to.setThemeMode(value);
                   }),
+              if (!kIsWeb)
               Text(
-                'Notifications',
+                'Notifications'.i18n,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
+              if (!kIsWeb)
               SwitchListTile(
                 value: Preferences.to.notifications,
-                title: Text('Receive Notifications'),
+                title: Text('Receive Notifications'.i18n),
                 onChanged: (value) {
                   if (value) {
                     Preferences.to.notifications = value;
@@ -73,12 +78,13 @@ class SettingsPage extends StatelessWidget {
                   }
                 },
               ),
+              if (!kIsWeb)
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Notification Time: ' +
+                      'Notification Time: '.i18n +
                           TimeOfDay(
                                   hour: Preferences.to.notificationHour,
                                   minute: Preferences.to.notificationMinute)
@@ -93,11 +99,11 @@ class SettingsPage extends StatelessWidget {
                                   Preferences.to.notificationMinute =
                                       time.minute,
                                   Notifications.to.setNotification(),
-                                  print(time.hour)
+                                  debugPrint('Time set: ${time.hour}:${time.minute}')
                                 }
                             });
                       },
-                      child: Text('Change'),
+                      child: Text('Change'.i18n),
                     ),
                   ],
                 ),

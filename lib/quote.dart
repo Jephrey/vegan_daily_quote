@@ -35,16 +35,18 @@ class Quote extends StatelessWidget {
                       )),
                 ),
               ),
-              Obx(() => Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                        '~ ${qs.credits} ~',
-                        style: TextStyle(
-                            fontSize: 14, fontStyle: FontStyle.italic),
-                      ),
+              Obx(
+                () => Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      '~ ${qs.credits} ~',
+                      style:
+                          TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
                     ),
-                  )),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
