@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'calendar.i18n.dart';
+import 'i18n/calendar.i18n.dart';
 
 class Calender extends StatelessWidget {
   @override

@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:vegan_daily_quote/quotes_store.dart';
 
-import 'bottom_bar.i18n.dart';
+import 'i18n/bottom_bar.i18n.dart';
 
 class BottomBar extends StatelessWidget {
   final QuotesStore qs = Get.find();

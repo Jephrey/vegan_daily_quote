@@ -14,7 +14,7 @@ import 'package:vegan_daily_quote/quotes_store.dart';
 import 'package:vegan_daily_quote/settings.dart';
 import 'package:vegan_daily_quote/theme_controller.dart';
 
-import 'main.i18n.dart';
+import 'i18n/main.i18n.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

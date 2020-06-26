@@ -6,7 +6,7 @@ import 'package:vegan_daily_quote/preferences.dart';
 
 import 'package:vegan_daily_quote/theme_controller.dart';
 
-import 'settings.i18n.dart';
+import 'i18n/settings.i18n.dart';
 
 class SettingsPage extends StatelessWidget {
   Future<TimeOfDay> selectTime(BuildContext context) async {
