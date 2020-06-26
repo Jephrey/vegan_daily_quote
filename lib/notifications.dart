@@ -41,7 +41,7 @@ class Notifications {
   }
 
   Notifications() {
-    initializationSettingsAndroid = AndroidInitializationSettings('icon');
+    initializationSettingsAndroid = AndroidInitializationSettings('notification');
     initializationSettings = new InitializationSettings(
         initializationSettingsAndroid, null);
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
