@@ -7,7 +7,7 @@ class Preferences extends RxController {
 
   SharedPreferences _prefs;
 
-  var _theme = ''.obs; // Theme: light, dark, system.
+  var _theme = 'system'.obs; // Theme: light, dark, system.
   var _favorites = <String>[].obs; // List of favorite quotes.
   var _notifications = true.obs; // Notification on or off.
   var _notificationHour = 12.obs; // Hour of notification.
@@ -18,35 +18,35 @@ class Preferences extends RxController {
   }
 
   // Theme.
-  String get theme => _theme.value ?? 'system'; 
+  String get theme => _theme.value; 
   set theme(String theme) {
     _theme.value = theme;    
     _setPreference('theme', theme);
   }
 
   // Favorites. (Preference store has no List of int.)
-  get favorites => _favorites.value ?? [];
+  get favorites => _favorites.value;
   set favorites(List<String> favorites) {
     _favorites.value = favorites;
     _setPreference('favList', favorites);
   }
 
   // Notifications.
-  bool get notifications => _notifications.value ?? true;
+  bool get notifications => _notifications.value;
   set notifications(bool notifications) {
     _notifications.value = notifications;
     _setPreference('notifications', notifications);
   }
 
   // Notification hour.
-  int get notificationHour => _notificationHour.value ?? 12;
+  int get notificationHour => _notificationHour.value;
   set notificationHour(int notificationHour) {
     _notificationHour.value = notificationHour;
     _setPreference('notificationHour', notificationHour);
   }
 
   // Notification minute.
-  int get notificationMinute => _notificationMinute.value  ?? 0;
+  int get notificationMinute => _notificationMinute.value;
   set notificationMinute(int notificationMinute) {
     _notificationMinute.value = notificationMinute;
     _setPreference('notificationMinute', notificationMinute);
