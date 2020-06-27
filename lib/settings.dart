@@ -64,21 +64,20 @@ class SettingsPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
-              if (!kIsWeb)
+              if (!kIsWeb || true)
               SwitchListTile(
                 value: Preferences.to.notifications,
                 title: Text('Receive Notifications'.i18n),
-                onChanged: (value) {
+                onChanged: (value) {                  
+                  Preferences.to.notifications = value;
                   if (value) {
-                    Preferences.to.notifications = value;
                     Notifications.to.setNotification();
                   } else {
-                    Preferences.to.notifications = false;
                     Notifications.to.cancelAll();
                   }
                 },
               ),
-              if (!kIsWeb)
+              if (!kIsWeb || true)
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -107,6 +106,13 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              SwitchListTile(
+                value: Preferences.to.notificationSound,
+                title: Text('Notification Sound Enabled'.i18n),
+                onChanged: (value) {
+                  Preferences.to.notificationSound = value;
+                },
               ),
             ],
           ),

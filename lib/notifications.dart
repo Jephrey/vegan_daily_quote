@@ -19,6 +19,7 @@ class Notifications {
         'channel id', 'channel name', 'channel description',
         importance: Importance.Default,
         priority: Priority.Default,
+        playSound: Preferences.to.notificationSound,
         ticker: 'VQD ticker');
     var notificationDetails = NotificationDetails(
         androidPlatformChannelSpecifics, null);
