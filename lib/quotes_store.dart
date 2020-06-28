@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:vegan_daily_quote/preferences.dart';
 
-class QuotesStore extends RxController {
+class QuotesStore extends GetxController {
   static QuotesStore get to => Get.find<QuotesStore>();
 
   // Observable variables.

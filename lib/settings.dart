@@ -58,56 +58,61 @@ class SettingsPage extends StatelessWidget {
                   onChanged: (value) {
                     ThemeController.to.setThemeMode(value);
                   }),
-              if (!kIsWeb)
-              Text(
-                'Notifications'.i18n,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.left,
-              ),
-              if (!kIsWeb)
-              SwitchListTile(
-                value: Preferences.to.notifications,
-                title: Text('Receive Notifications'.i18n),
-                onChanged: (value) {
-                  if (value) {
+                Text(
+                  'Notifications'.i18n,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.left,
+                ),
+                SwitchListTile(
+                  value: Preferences.to.notifications,
+                  title: Text('Receive Notifications'.i18n),
+                  onChanged: (value) {
                     Preferences.to.notifications = value;
-                    Notifications.to.setNotification();
-                  } else {
-                    Preferences.to.notifications = false;
-                    Notifications.to.cancelAll();
-                  }
+                    if (value) {
+                      Notifications.to.setNotification();
+                    } else {
+                      Notifications.to.cancelAll();
+                    }
+                  },
+                ),
+              SwitchListTile(
+                value: Preferences.to.notificationSound,
+                title: Text('Notification Sound'.i18n),
+                onChanged: (value) {
+                  print(value);
+                  Preferences.to.notificationSound = value;
                 },
               ),
-              if (!kIsWeb)
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Notification Time: '.i18n +
-                          TimeOfDay(
-                                  hour: Preferences.to.notificationHour,
-                                  minute: Preferences.to.notificationMinute)
-                              .format(context),
-                    ),
-                    FlatButton(
-                      onPressed: () {
-                        selectTime(context).then((time) => {
-                              if (time != null)
-                                {
-                                  Preferences.to.notificationHour = time.hour,
-                                  Preferences.to.notificationMinute =
-                                      time.minute,
-                                  Notifications.to.setNotification(),
-                                  debugPrint('Time set: ${time.hour}:${time.minute}')
-                                }
-                            });
-                      },
-                      child: Text('Change'.i18n),
-                    ),
-                  ],
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Notification Time: '.i18n +
+                            TimeOfDay(
+                                    hour: Preferences.to.notificationHour,
+                                    minute: Preferences.to.notificationMinute)
+                                .format(context),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          selectTime(context).then((time) => {
+                                if (time != null)
+                                  {
+                                    Preferences.to.notificationHour = time.hour,
+                                    Preferences.to.notificationMinute =
+                                        time.minute,
+                                    Notifications.to.setNotification(),
+                                    debugPrint(
+                                        'Time set: ${time.hour}:${time.minute}')
+                                  }
+                              });
+                        },
+                        child: Text('Change'.i18n),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),

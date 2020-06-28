@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // All preferences in one place.
-class Preferences extends RxController {
+class Preferences extends GetxController {
   static Preferences get to => Get.find<Preferences>();
 
   SharedPreferences _prefs;
@@ -12,6 +12,7 @@ class Preferences extends RxController {
   var _notifications = true.obs; // Notification on or off.
   var _notificationHour = 12.obs; // Hour of notification.
   var _notificationMinute = 0.obs; // Minute of notification.
+  var _notificationSound = true.obs; // Sound or not.
 
   Preferences()  {
     _init();
@@ -52,6 +53,13 @@ class Preferences extends RxController {
     _setPreference('notificationMinute', notificationMinute);
   }
 
+  // Notification minute.
+  bool get notificationSound => _notificationSound.value;
+  set notificationSound(bool notificationSound) {
+    _notificationSound.value = notificationSound;
+    _setPreference('notificationSound', notificationSound);
+  }
+
   Future<void> _setPreference(String key, var value) async {
     if (value is String) {
       await _prefs?.setString(key, value); 
@@ -73,5 +81,6 @@ class Preferences extends RxController {
     _notifications.value = _prefs.getBool('notifications') ?? true;
     _notificationHour.value = _prefs.getInt('notificationHour') ?? 12;
     _notificationMinute.value = _prefs.getInt('notificationHour') ?? 0;
+    _notificationSound.value = _prefs.getInt('notificationSound') ?? true;
   }
 }

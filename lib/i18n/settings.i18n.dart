@@ -47,6 +47,11 @@ extension Localization on String {
         "en_us": "Change",
         "nl_nl": "Wijzigen",
         "de_de": "Ändern",
+      } +
+      {
+        "en_us": "Notification Sound",
+        "nl_nl": "Notificatiegeluid",
+        "de_de": "Benachrichtingston",
       };
 
   String get i18n => localize(this, _t);
