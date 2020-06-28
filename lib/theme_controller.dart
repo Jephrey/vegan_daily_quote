@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegan_daily_quote/preferences.dart';
 
-class ThemeController extends RxController {
+class ThemeController extends GetxController {
   static ThemeController get to => Get.find<ThemeController>();
   
   var theme = ThemeMode.dark.obs;

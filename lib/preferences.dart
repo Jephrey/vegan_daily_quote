@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // All preferences in one place.
-class Preferences extends RxController {
+class Preferences extends GetxController {
   static Preferences get to => Get.find<Preferences>();
 
   SharedPreferences _prefs;
