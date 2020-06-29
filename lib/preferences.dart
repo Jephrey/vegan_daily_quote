@@ -81,6 +81,6 @@ class Preferences extends GetxController {
     _notifications.value = _prefs.getBool('notifications') ?? true;
     _notificationHour.value = _prefs.getInt('notificationHour') ?? 12;
     _notificationMinute.value = _prefs.getInt('notificationHour') ?? 0;
-    _notificationSound.value = _prefs.getInt('notificationSound') ?? true;
+    _notificationSound.value = _prefs.getBool('notificationSound') ?? true;
   }
 }

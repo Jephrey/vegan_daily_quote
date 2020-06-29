@@ -26,8 +26,13 @@ class BottomBar extends StatelessWidget {
               Clipboard.setData(new ClipboardData(
                       text: '${qs.quote}\n${qs.credits}\n${qs.link}'))
                   .then((_) {
-                Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text("Quote copied to clipboard".i18n)));
+                Get.snackbar(
+                  'Vegan Daily Quote',
+                  "Quote copied to clipboard".i18n,
+                  snackPosition: SnackPosition.BOTTOM,
+                  icon: Icon(Icons.content_copy),
+                  shouldIconPulse: true,
+                );
               });
             },
             child: Icon(Icons.content_copy),
@@ -48,12 +53,23 @@ class BottomBar extends StatelessWidget {
           message: 'Open link'.i18n,
           child: FlatButton(
             // Enable button if there is a link. Null disables the button.
-            onPressed: qs.link != '' ?
-             () async => {
-              if (qs.link != '') {
-                if (await canLaunch(qs.link)) await launch(qs.link)
-              }
-            }: null,
+            onPressed: qs.link != ''
+                ? () async => {
+                      if (qs.link != '')
+                        {if (await canLaunch(qs.link)) await launch(qs.link)}
+                    }
+                : null,
+            onLongPress: qs.link != ''
+                ? () => {
+                      Get.snackbar(
+                        'Link to quote'.i18n,
+                        qs.link,
+                        snackPosition: SnackPosition.BOTTOM,
+                        icon: Icon(Icons.link),
+                        shouldIconPulse: true,
+                      )
+                    }
+                : null,
             child: Icon(Icons.link),
           ),
         ),

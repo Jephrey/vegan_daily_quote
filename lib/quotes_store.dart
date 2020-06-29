@@ -129,64 +129,64 @@ class QuotesStore extends GetxController {
           "link": "https://www.vegansociety.com/go-vegan/definition-veganism"
       },
       {
-          "quote": "People don’t think about how each of these animals that we call dinner have the same kinds of personalities as our dogs and cats.",
-          "credits": "Emily Deschanel",
-          "link": "https://en.wikipedia.org/wiki/Emily_Deschanel"
-      },
+          "quote": "There is no fundamental difference between man and animals in their ability to feel pleasure and pain, happiness, and misery.",
+          "credits": "Charles Darwin",
+          "link": "https://blogs.uoregon.edu/rschoefff16gateway/"
+      },  
       {
           "quote": "I hold that the more helpless a creature, the more entitled it is to protection by man from the cruelty of man.",
           "credits": "Mahātmā Mohandas Gandhi",
           "link": "https://en.wikipedia.org/wiki/Mahatma_Gandhi"
       },
       {
-          "quote": "Empty test quote",
-          "credits": "Jeffrey Rusterholz",
+          "quote": "I think; therefore I’m vegan.",
+          "credits": "Unknown",
           "link": ""
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "I am a firm believer in eating a full plant-based, whole food diet that can expand your life length and make you an all-around happier person. It is tricky dining out, but I just stick to what I know – veggies, fruit and salad – then when I get home I’ll have something else.",
+          "credits": "Ariana Grande",
+          "link": "https://www.mindbodygreen.com/0-16785/ariana-grande-explains-why-shes-vegan.html"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "Going vegetarian – and then vegan – has calmed me down, and it has also made me physically and emotionally strong. I do crave meat once in a while, but I find that spiritually, non-vegetarian food works against my emotional health.",
+          "credits": "Kangana Ranaut",
+          "link": "https://www.quotespace.org/quotes/Going-vegetarian-a/325472"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "It’s my firm intention to whop cancer into submission and I truly believe I’ve given myself the best start possible by radically overhauling my diet and by staying true to my motto, which is: Don’t worry, be happy, feel good. The first thing I did when I was diagnosed was to turn vegan.",
+          "credits": "Larry Hagman",
+          "link": "https://www.dailymail.co.uk/tvshowbiz/article-2083738/Dallas-legend-Larry-Hagman-tells-fighting-cancer--turning-vegan-nut.html"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "My refusing to eat meat occasioned inconveniency, and I have been frequently chided for my singularity. But my light repast allows for greater progress, for greater clearness of head and quicker comprehension.",
+          "credits": "Benjamin Franklin",
+          "link": "https://www.relicsworld.com/benjamin-franklin/my-refusing-to-eat-meat-occasioned-inconveniency-and-i-have-been-frequently-author-benjamin-franklin"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "Animals are my friends, and I don't eat my friends.",
+          "credits": "George Bernard Shaw",
+          "link": "https://www.veganbanana.com/vegan-meme-animals-are-my-friends-and-i-dont-eat-my-friends/"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "Just as one wants happiness and fears pain, just as one wants to live and not to die, so do other creatures.",
+          "credits": "The Dalai Lama XIV",
+          "link": "http://www.humanedecisions.com/dalai-lama-said-life-is-dear-for-all-creatures/"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "Being vegan helped me realize I can say and do what I believe is right. That’s powerful.",
+          "credits": "Alicia Silverstone",
+          "link": "https://www.self.com/story/alicia-silverstone-son-vegan"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "People don’t think about how each of these animals that we call dinner have the same kinds of personalities as our dogs and cats.",
+          "credits": "Emily Deschanel",
+          "link": "https://www.livekindly.co/emily-deschanel-reveals-all-about-vegan-parenting/"
       },
       {
-          "quote": "",
-          "credits": "",
-          "link": ""
+          "quote": "Anyone who cares about the Earth – really cares – must stop eating animals.",
+          "credits": "Linda McCartney",
+          "link": "https://www.vice.com/en_uk/article/ev3e57/how-linda-mccartneys-legacy-lives-on-in-the-modern-vegan-movement"
       },
       {
           "quote": "",

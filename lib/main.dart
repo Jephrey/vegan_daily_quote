@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -31,16 +32,16 @@ class MyApp extends StatelessWidget {
     ThemeController.to.getThemeMode();
     const _appTitle = 'Vegan Daily Quote';
     return GetMaterialApp(
-      localizationsDelegates: [            
-               GlobalMaterialLocalizations.delegate,
-               GlobalWidgetsLocalizations.delegate,
-               GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-               const Locale('en', "US"), 
-               const Locale('nl', "NL"),
-               const Locale('de', "DE"),
-            ],
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', "US"),
+        const Locale('nl', "NL"),
+        const Locale('de', "DE"),
+      ],
       title: _appTitle,
       theme: ThemeData.light().copyWith(primaryColor: Colors.lightGreen),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.green),
@@ -61,16 +62,28 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   final QuotesStore qs = Get.put(QuotesStore.random());
+  final _cycles = [
+        AppLifecycleState.resumed.toString,
+        AppLifecycleState.paused.toString,
+        AppLifecycleState.inactive.toString
+      ];
 
   @override
   void initState() {
     super.initState();
-
+    
     if (!kIsWeb) Notifications.to.setNotification();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    
+    SystemChannels.lifecycle.setMessageHandler((msg) {
+      debugPrint('SystemChannels> $msg');
+      if (_cycles.contains(msg)) setState(() {});
+    });
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
