@@ -4,10 +4,9 @@ import 'package:get/get.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
+import 'i18n/bottom_bar.i18n.dart';
 
 import 'package:vegan_daily_quote/quotes_store.dart';
-
-import 'i18n/bottom_bar.i18n.dart';
 
 class BottomBar extends StatelessWidget {
   final QuotesStore qs = Get.find();
@@ -51,26 +50,15 @@ class BottomBar extends StatelessWidget {
           ),
         Tooltip(
           message: 'Open link'.i18n,
-          child: FlatButton(
-            // Enable button if there is a link. Null disables the button.
-            onPressed: qs.link != ''
-                ? () async => {
-                      if (qs.link != '')
-                        {if (await canLaunch(qs.link)) await launch(qs.link)}
-                    }
-                : null,
-            onLongPress: qs.link != ''
-                ? () => {
-                      Get.snackbar(
-                        'Link to quote'.i18n,
-                        qs.link,
-                        snackPosition: SnackPosition.BOTTOM,
-                        icon: Icon(Icons.link),
-                        shouldIconPulse: true,
-                      )
-                    }
-                : null,
-            child: Icon(Icons.link),
+          child: Obx(
+            () => FlatButton(
+              // Enable button if there is a link. Null disables the button.
+              onPressed: qs.link.length > 0
+                  ? () async =>
+                      {if (await canLaunch(qs.link)) await launch(qs.link)}
+                  : null,
+              child: Icon(Icons.link),
+            ),
           ),
         ),
         Tooltip(

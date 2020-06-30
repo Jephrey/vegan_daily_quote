@@ -76,11 +76,11 @@ class SettingsPage extends StatelessWidget {
                   },
                 ),
               SwitchListTile(
-                value: Preferences.to.notificationSound,
+                value: Preferences.to.notificationSoundEnabled,
                 title: Text('Notification Sound'.i18n),
                 onChanged: (value) {
                   print(value);
-                  Preferences.to.notificationSound = value;
+                  Preferences.to.notificationSoundEnabled = value;
                 },
               ),
                 Container(

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -17,11 +18,13 @@ import 'package:vegan_daily_quote/theme_controller.dart';
 
 import 'i18n/main.i18n.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await GetStorage.init();
   Get.lazyPut<ThemeController>(() => ThemeController());
   Get.lazyPut<QuotesStore>(() => QuotesStore());
-  Get.put(Preferences());
+  Get.lazyPut<Preferences>(() => Preferences());
   if (!kIsWeb) Get.put(Notifications());
   runApp(MyApp());
 }

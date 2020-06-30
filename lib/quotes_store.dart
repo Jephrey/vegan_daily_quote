@@ -29,15 +29,13 @@ class QuotesStore extends GetxController {
   }
 
   void savePreferences() {
-    List<String> favList = _favorites.map((i) => i.toString()).toList(); // Convert  int to string list.
-    Preferences.to.favorites = favList;
+    Preferences.to.favorites = List<int>.from(_favorites);
   }
 
   void getPreferences() {
-    List<String> savedStrList = Preferences.to.favorites;
-    _favorites.value = savedStrList.map((i)=> int.parse(i)).toSet().toList(); // Also remove any duplicates.    
+    _favorites.value = Preferences.to.favorites;
   }
-
+  
   void set(int newDay) {
     if (newDay > 0 && newDay <= _max) _day.value = newDay;
   }

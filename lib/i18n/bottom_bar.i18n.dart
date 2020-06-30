@@ -27,11 +27,6 @@ extension Localization on String {
         "en_us": "Quote copied to clipboard",
         "nl_nl": "Citaat naar klembord gekopieerd",
         "de_de": "Zitat in Zwischenablage kopiert",
-      } +
-      {
-        "en_us": "Link to quote",
-        "nl_nl": "Link naar citaat",
-        "de_de": "Link zum Zitat",
       };
 
   String get i18n => localize(this, _t);
