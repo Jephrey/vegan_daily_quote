@@ -1,86 +1,67 @@
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 
 // All preferences in one place.
 class Preferences extends GetxController {
   static Preferences get to => Get.find<Preferences>();
 
-  SharedPreferences _prefs;
+  final _prefs = GetStorage();
 
   var _theme = 'system'.obs; // Theme: light, dark, system.
-  var _favorites = <String>[].obs; // List of favorite quotes.
+  var _favorites = [].obs; // List of favorite quotes.
   var _notifications = true.obs; // Notification on or off.
   var _notificationHour = 12.obs; // Hour of notification.
   var _notificationMinute = 0.obs; // Minute of notification.
-  var _notificationSound = true.obs; // Sound or not.
+  var _notificationSoundEnabled = true.obs; // Sound or not.
 
-  Preferences()  {
-    _init();
+  Preferences() {
+     _theme.value = _prefs.read('theme') ?? 'system';
+    _favorites.value = _prefs.read('favList') ?? [];
+    _notifications.value = _prefs.read('notifications') ?? true;
+    _notificationHour.value = _prefs.read('notificationHour') ?? 12;
+    _notificationMinute.value = _prefs.read('notificationHour') ?? 0;
+    _notificationSoundEnabled.value = _prefs.read('notificationSoundEnabled') ?? true;
   }
 
   // Theme.
-  String get theme => _theme.value; 
+  String get theme => _theme.value;
   set theme(String theme) {
-    _theme.value = theme;    
-    _setPreference('theme', theme);
+    _theme.value = theme;
+    _prefs.write('theme', theme);
   }
 
   // Favorites. (Preference store has no List of int.)
   get favorites => _favorites.value;
-  set favorites(List<String> favorites) {
+  set favorites(List<int> favorites) {
     _favorites.value = favorites;
-    _setPreference('favList', favorites);
+    _prefs.write('favList', favorites);
   }
 
   // Notifications.
   bool get notifications => _notifications.value;
   set notifications(bool notifications) {
     _notifications.value = notifications;
-    _setPreference('notifications', notifications);
+    _prefs.write('notifications', notifications);
   }
 
   // Notification hour.
   int get notificationHour => _notificationHour.value;
   set notificationHour(int notificationHour) {
     _notificationHour.value = notificationHour;
-    _setPreference('notificationHour', notificationHour);
+    _prefs.write('notificationHour', notificationHour);
   }
 
   // Notification minute.
   int get notificationMinute => _notificationMinute.value;
   set notificationMinute(int notificationMinute) {
     _notificationMinute.value = notificationMinute;
-    _setPreference('notificationMinute', notificationMinute);
+    _prefs.write('notificationMinute', notificationMinute);
   }
 
-  // Notification minute.
-  bool get notificationSound => _notificationSound.value;
-  set notificationSound(bool notificationSound) {
-    _notificationSound.value = notificationSound;
-    _setPreference('notificationSound', notificationSound);
-  }
-
-  Future<void> _setPreference(String key, var value) async {
-    if (value is String) {
-      await _prefs?.setString(key, value); 
-    } else if (value is int) {
-      await _prefs?.setInt(key, value);
-    } else if (value is bool) {
-      await _prefs?.setBool(key, value);    
-    } else if (value is List<String>) {
-      await _prefs?.setStringList(key, value);
-    } else if (value is double) {
-      await _prefs?.setDouble(key, value);
-    }
-  }
-
-  _init() async {
-    _prefs = await SharedPreferences.getInstance();
-    _theme.value = _prefs.getString('theme') ?? 'system';
-    _favorites.value = _prefs.getStringList('favList') ?? [];
-    _notifications.value = _prefs.getBool('notifications') ?? true;
-    _notificationHour.value = _prefs.getInt('notificationHour') ?? 12;
-    _notificationMinute.value = _prefs.getInt('notificationHour') ?? 0;
-    _notificationSound.value = _prefs.getBool('notificationSound') ?? true;
+  // Notification Sound Enabled?
+  bool get notificationSoundEnabled => _notificationSoundEnabled.value;
+  set notificationSoundEnabled(bool notificationSoundEnabled) {
+    _notificationSoundEnabled.value = notificationSoundEnabled;
+    _prefs.write('notificationSoundEnabled', notificationSoundEnabled);
   }
 }
