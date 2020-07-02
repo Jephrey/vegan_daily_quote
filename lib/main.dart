@@ -85,6 +85,7 @@ class _MyHomeState extends State<MyHome> {
     SystemChannels.lifecycle.setMessageHandler((msg) {
       debugPrint('SystemChannels> $msg');
       if (_cycles.contains(msg)) setState(() {});
+      return null;
     });
     
     return Scaffold(
