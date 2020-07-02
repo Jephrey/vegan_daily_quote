@@ -16,7 +16,7 @@ class Notifications {
 
   Future<void> setNotification() async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'channel id', 'channel name', 'channel description',
+        'vdq 1', 'channel vdq', 'Vegan Daily Quote',
         importance: Importance.Default,
         priority: Priority.Default,
         playSound: Preferences.to.notificationSoundEnabled,

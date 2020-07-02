@@ -30,7 +30,7 @@ class Preferences extends GetxController {
     _prefs.write('theme', theme);
   }
 
-  // Favorites. (Preference store has no List of int.)
+  // Favorites.
   get favorites => _favorites.value;
   set favorites(List<int> favorites) {
     _favorites.value = favorites;
