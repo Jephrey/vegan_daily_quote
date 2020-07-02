@@ -6,7 +6,7 @@ import 'i18n/quote.i18n.dart';
 import 'package:vegan_daily_quote/quotes_store.dart';
 
 class Quote extends StatelessWidget {
-  final QuotesStore qs = Get.find();
+  final QuotesStore qs = Get.find<QuotesStore>();
 
   @override
   Widget build(BuildContext context) {
