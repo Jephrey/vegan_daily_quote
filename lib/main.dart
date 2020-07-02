@@ -22,9 +22,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await GetStorage.init();
-  Get.put<ThemeController>(ThemeController());
-  Get.put<QuotesStore>(QuotesStore());
-  Get.put<Preferences>(Preferences());
+  Get.lazyPut<ThemeController>(() => ThemeController());
+  Get.lazyPut<QuotesStore>(() => QuotesStore());
+  Get.lazyPut<Preferences>(() => Preferences());
   if (!kIsWeb) Get.put(Notifications());
   runApp(MyApp());
 }
