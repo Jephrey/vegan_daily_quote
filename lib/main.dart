@@ -64,30 +64,26 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  final QuotesStore qs = Get.put(QuotesStore.random());
-  final _cycles = [
-        AppLifecycleState.resumed.toString,
-        AppLifecycleState.paused.toString,
-        AppLifecycleState.inactive.toString
-      ];
+  final QuotesStore qs = Get.put(QuotesStore());
 
   @override
   void initState() {
     super.initState();
-    
-    if (!kIsWeb) Notifications.to.setNotification();
 
+    if (!kIsWeb) Notifications.to.setNotification();
   }
 
   @override
   Widget build(BuildContext context) {
-    
     SystemChannels.lifecycle.setMessageHandler((msg) {
       debugPrint('SystemChannels> $msg');
-      if (_cycles.contains(msg)) setState(() {});
+      if (msg.contains('resumed')) {
+        QuotesStore.to.quoteOfTheDay();
+        setState(() {});
+      }
       return null;
     });
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

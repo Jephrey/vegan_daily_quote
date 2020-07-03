@@ -28,7 +28,7 @@ class Notifications {
 
     await flutterLocalNotificationsPlugin.showDailyAtTime(
         0,
-        'Quote by ${QuotesStore.to.credits}',
+        'Quote by ${QuotesStore.to.notifcationQuote}',
         QuotesStore.to.quote,
         Time(Preferences.to.notificationHour, Preferences.to.notificationMinute),
         notificationDetails,
