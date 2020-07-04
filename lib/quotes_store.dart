@@ -34,6 +34,17 @@ class QuotesStore extends GetxController {
     random();
   }
 
+  /// Return the quote and credits of tomorrow.
+  List<String> get tomorrowsQuote {
+    var _tomorrow = _day.value + 1;
+    if (_tomorrow >= _max) {
+      _tomorrow = 0;
+    }
+    var _quote = _quotes[_tomorrow]['quote'];
+    var _credits = _quotes[_tomorrow]['credits'];
+    return [_quote, _credits];
+  }
+
   void quoteOfTheDay() {
     _day.value = int.parse(DateFormat("D").format(DateTime.now())) % _max;
   }

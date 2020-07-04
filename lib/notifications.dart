@@ -21,17 +21,30 @@ class Notifications {
         priority: Priority.Default,
         playSound: Preferences.to.notificationSoundEnabled,
         ticker: 'VQD ticker');
-    var notificationDetails = NotificationDetails(
-        androidPlatformChannelSpecifics, null);
+    var notificationDetails =
+        NotificationDetails(androidPlatformChannelSpecifics, null);
 
     cancelAll();
 
+    // If the notification time is before the current time then
+    // use tomorrow's quote.
+    var _now = TimeOfDay.now();
+    var _hour = Preferences.to.notificationHour;
+    var _min = Preferences.to.notificationMinute;
+
+    String _quote;
+    String _credits;
+    if (_hour <= _now.hour && _min <= _now.minute) {
+      List<String> _tomorrow = QuotesStore.to.tomorrowsQuote;
+      _quote = _tomorrow[0];
+      _credits = _tomorrow[1];
+    } else {
+      _quote = QuotesStore.to.quote;
+      _credits = QuotesStore.to.credits;
+    }
+
     await flutterLocalNotificationsPlugin.showDailyAtTime(
-        0,
-        'Quote by ${QuotesStore.to.notifcationQuote}',
-        QuotesStore.to.quote,
-        Time(Preferences.to.notificationHour, Preferences.to.notificationMinute),
-        notificationDetails,
+        0, 'Quote by $_credits', _quote, Time(_hour, _min), notificationDetails,
         payload: 'VQD payload');
   }
 
@@ -39,12 +52,14 @@ class Notifications {
     if (payload != null) {
       debugPrint('Notification payload: $payload');
     }
+    setNotification(); // Set for next day.
   }
 
   Notifications() {
-    initializationSettingsAndroid = AndroidInitializationSettings('notification');
-    initializationSettings = new InitializationSettings(
-        initializationSettingsAndroid, null);
+    initializationSettingsAndroid =
+        AndroidInitializationSettings('notification');
+    initializationSettings =
+        new InitializationSettings(initializationSettingsAndroid, null);
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: onSelectNotification);
   }
