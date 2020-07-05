@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'i18n/settings.i18n.dart';
+
 import 'package:vegan_daily_quote/notifications.dart';
 import 'package:vegan_daily_quote/preferences.dart';
-
 import 'package:vegan_daily_quote/theme_controller.dart';
-
-import 'i18n/settings.i18n.dart';
 
 class SettingsPage extends StatelessWidget {
   Future<TimeOfDay> selectTime(BuildContext context) async {
