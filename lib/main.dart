@@ -95,6 +95,13 @@ class _MyHomeState extends State<MyHome> {
               qs.random();
             },
           ),
+          // IconButton(
+          //   tooltip: 'Favorites'.i18n,
+          //   icon: const Icon(Icons.list),
+          //   onPressed: () {
+          //     Get.to(Favorites());
+          //   },
+          // ),
           IconButton(
             tooltip: 'Settings'.i18n,
             icon: const Icon(Icons.settings),
