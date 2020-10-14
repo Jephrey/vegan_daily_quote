@@ -8,6 +8,7 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 import 'package:vegan_daily_quote/bottom_bar.dart';
 import 'package:vegan_daily_quote/calendar.dart';
@@ -19,9 +20,6 @@ import 'package:vegan_daily_quote/settings.dart';
 import 'package:vegan_daily_quote/theme_controller.dart';
 
 import 'i18n/main.i18n.dart';
-
-
-const MethodChannel platform = MethodChannel('nl.jalava/vegan_daily_quote');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,8 +35,9 @@ void main() async {
 
 Future<void> _configureLocalTimeZone() async {
   tz.initializeTimeZones();
-  final String timeZoneName = await platform.invokeMethod('getTimeZoneName');
-  tz.setLocalLocation(tz.getLocation(timeZoneName));
+  final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
+  debugPrint('Timezone: $currentTimeZone');
+  tz.setLocalLocation(tz.getLocation(currentTimeZone));
 }
 
 class MyApp extends StatelessWidget {
