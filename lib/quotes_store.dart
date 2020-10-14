@@ -22,7 +22,7 @@ class QuotesStore extends GetxController {
     return _quotes[_day.value]['credits'];
   }
 
-  bool get isFavorite => _favorites.value.contains(_day.value);
+  bool get isFavorite => _favorites.contains(_day.value);
 
   QuotesStore() {
     getPreferences();
@@ -251,14 +251,14 @@ class QuotesStore extends GetxController {
     {"quote": "If you really care about animals, then stop trying to figure out how to exploit them ‘compassionately’. Just stop exploiting them.", "credits": "Gary Francione", "link": "https://www.abolitionistapproach.com/about/gary-l-francione/"},
     {"quote": "The question is not, 'Can they reason?' nor, 'Can they talk?' but rather, 'Can they suffer?", "credits": "Jeremy Bentham", "link": "https://speakingofresearch.com/extremism-undone/ar-beliefs/"},
     {"quote": "The soul is the same in all living creatures, although the body of each is different.", "credits": "Hippocrates", "link": "https://thebark.com/content/soul-all-living-creatures"},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
+    {"quote": "Every person I have met who has gone vegan says it is the best decision they have ever made.", "credits": "Lewis Hamilton", "link": "https://www.brainyquote.com/quotes/lewis_hamilton_872365"},
+    {"quote": " became a vegetarian after realizing that animals feel afraid, cold, hungry and unhappy like we do.", "credits": "Cesar Chavez", "link": "https://www.azquotes.com/quote/816227"},
+    {"quote": "A vegan diet is probably the single biggest way to reduce your impact on planet Earth …. It is far bigger than cutting down on your flights or buying an electric car.", "credits": "Joseph Poore", "link": "https://www.ecowatch.com/vegan-earth-footprint-2574241439.html"},
+    {"quote": "Nothing will benefit human health and increase the chances for survival of life on Earth as much as the evolution to a vegetarian diet.", "credits": "Albert Einstein", "link": "https://www.foodandwine.com/cooking-techniques/albert-einstein-genius-birthday-boy-vegetarian-vegan"},
+    {"quote": "One should not kill a living being, nor cause it to be killed, nor should one incite another to kill. Do not injure any being, either strong or weak, in the world.", "credits": "Buddha", "link": "http://www.humanedecisions.com/buddha-said-one-should-not-kill-a-living-being/"},
+    {"quote": "Veganism extends compassionate, gentle benevolence to all sentient beings.", "credits": "Stanley Sapon", "link": "https://ivu.org/congress/wvc96/texts/stanley.html"},
+    {"quote": "Animals are not ingredients.", "credits": "Barbara Thompson", "link": "https://veganposters.com/author/barbara-thompson"},
+    {"quote": "For as long as man continues to be the ruthless destroyer of lower living beings, he will never know health or peace. For as long as men massacre animals, they will kill each other. Indeed, he who sows the seeds of murder and pain cannot reap joy and love.", "credits": "Pythagoras", "link": "https://ivu.org/history/greece_rome/pythagoras.html"},
     {"quote": "", "credits": "", "link": ""},
     {"quote": "", "credits": "", "link": ""},
     {"quote": "", "credits": "", "link": ""},

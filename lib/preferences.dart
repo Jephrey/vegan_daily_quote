@@ -32,7 +32,7 @@ class Preferences extends GetxController {
   }
 
   // Favorites.
-  get favorites => _favorites.value;
+  get favorites => _favorites;
   set favorites(List<int> favorites) {
     _favorites.value = favorites;
     _prefs.write('favList', favorites);

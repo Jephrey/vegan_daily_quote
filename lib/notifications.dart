@@ -6,46 +6,58 @@ import 'package:get/get.dart';
 import 'package:vegan_daily_quote/preferences.dart';
 import 'package:vegan_daily_quote/quotes_store.dart';
 
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
 class Notifications {
   static Notifications get to => Get.find<Notifications>();
 
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   var initializationSettingsAndroid;
   var initializationSettings;
 
   Future<void> setNotification() async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'vdq 1', 'channel vdq', 'Vegan Daily Quote',
-        importance: Importance.Default,
-        priority: Priority.Default,
-        playSound: Preferences.to.notificationSoundEnabled,
-        ticker: 'VQD ticker');
-    var notificationDetails =
-        NotificationDetails(androidPlatformChannelSpecifics, null);
-
     cancelAll();
+
+    tz.initializeTimeZones();
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
 
     // If the notification time is before the current time then
     // use tomorrow's quote.
-    var _now = TimeOfDay.now();
-    var _hour = Preferences.to.notificationHour;
-    var _min = Preferences.to.notificationMinute;
+    final _hour = Preferences.to.notificationHour;
+    final _min = Preferences.to.notificationMinute;
 
     String _quote;
     String _credits;
-    if (_hour <= _now.hour && _min <= _now.minute) {
+
+    tz.TZDateTime scheduledDate =
+        tz.TZDateTime(tz.local, now.year, now.month, now.day, _hour, _min);
+
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
       List<String> _tomorrow = QuotesStore.to.tomorrowsQuote;
       _quote = _tomorrow[0];
       _credits = _tomorrow[1];
-    } else {
+    }  else {
       _quote = QuotesStore.to.quote;
       _credits = QuotesStore.to.credits;
     }
 
-    await flutterLocalNotificationsPlugin.showDailyAtTime(
-        0, 'Quote by $_credits', _quote, Time(_hour, _min), notificationDetails,
-        payload: 'VQD payload');
+    var bigTextStyleInformation = BigTextStyleInformation('<i>$_quote</i>', htmlFormatBigText: true, contentTitle: '<b>$_credits</b>', htmlFormatContentTitle: true);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'vdq 1', 'channel vdq', 'Vegan Daily Quote',
+        importance: Importance.defaultImportance,
+        priority: Priority.defaultPriority,
+        playSound: Preferences.to.notificationSoundEnabled,
+        styleInformation: bigTextStyleInformation,
+        ticker: 'VDQ ticker');
+    var platformChannelSpecifics =  NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0, '', '', scheduledDate, platformChannelSpecifics,
+        payload: 'VDQ payload',
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime, androidAllowWhileIdle: true,);
   }
 
   Future onSelectNotification(String payload) async {
@@ -56,15 +68,15 @@ class Notifications {
   }
 
   Notifications() {
-    initializationSettingsAndroid =
+    const initializationSettingsAndroid =
         AndroidInitializationSettings('notification');
-    initializationSettings =
-        new InitializationSettings(initializationSettingsAndroid, null);
+    final initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: onSelectNotification);
   }
 
-  cancelAll() {
+  Future<void> cancelAll() async {
     flutterLocalNotificationsPlugin.cancelAll();
   }
 }

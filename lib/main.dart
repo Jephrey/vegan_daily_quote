@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 import 'package:vegan_daily_quote/bottom_bar.dart';
 import 'package:vegan_daily_quote/calendar.dart';
@@ -18,8 +20,12 @@ import 'package:vegan_daily_quote/theme_controller.dart';
 
 import 'i18n/main.i18n.dart';
 
+
+const MethodChannel platform = MethodChannel('nl.jalava/vegan_daily_quote');
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await _configureLocalTimeZone();
 
   await GetStorage.init();
   Get.lazyPut<ThemeController>(() => ThemeController());
@@ -27,6 +33,12 @@ void main() async {
   Get.lazyPut<Preferences>(() => Preferences());
   if (!kIsWeb) Get.put(Notifications());
   runApp(MyApp());
+}
+
+Future<void> _configureLocalTimeZone() async {
+  tz.initializeTimeZones();
+  final String timeZoneName = await platform.invokeMethod('getTimeZoneName');
+  tz.setLocalLocation(tz.getLocation(timeZoneName));
 }
 
 class MyApp extends StatelessWidget {
@@ -56,7 +68,7 @@ class MyApp extends StatelessWidget {
 
 class MyHome extends StatefulWidget {
   final String title;
-
+  
   MyHome({Key key, this.title}) : super(key: key);
 
   @override
@@ -110,7 +122,7 @@ class _MyHomeState extends State<MyHome> {
                 context: context,
                 applicationIcon: const Icon(Icons.calendar_today),
                 applicationName: widget.title,
-                applicationVersion: '0.5.0',
+                applicationVersion: '0.6.0',
                 applicationLegalese: '©2020 Jeffrey Rüsterholz Ⓥ',
               );
             },
@@ -167,3 +179,5 @@ class _MyHomeState extends State<MyHome> {
     }
   }
 }
+
+
