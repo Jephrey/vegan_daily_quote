@@ -15,12 +15,13 @@ class Preferences extends GetxController {
   var _notificationSoundEnabled = true.obs; // Sound or not.
 
   Preferences() {
-     _theme.value = _prefs.read('theme') ?? 'system';
+    _theme.value = _prefs.read('theme') ?? 'system';
     _favorites.value = _prefs.read('favList') ?? [];
     _notifications.value = _prefs.read('notifications') ?? true;
     _notificationHour.value = _prefs.read('notificationHour') ?? 12;
-    _notificationMinute.value = _prefs.read('notificationHour') ?? 0;
-    _notificationSoundEnabled.value = _prefs.read('notificationSoundEnabled') ?? true;
+    _notificationMinute.value = _prefs.read('notificationMinute') ?? 0;
+    _notificationSoundEnabled.value =
+        _prefs.read('notificationSoundEnabled') ?? true;
   }
 
   // Theme.
@@ -31,7 +32,7 @@ class Preferences extends GetxController {
   }
 
   // Favorites.
-  get favorites => _favorites.value;
+  get favorites => _favorites;
   set favorites(List<int> favorites) {
     _favorites.value = favorites;
     _prefs.write('favList', favorites);

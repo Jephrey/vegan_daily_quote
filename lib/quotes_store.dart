@@ -22,7 +22,7 @@ class QuotesStore extends GetxController {
     return _quotes[_day.value]['credits'];
   }
 
-  bool get isFavorite => _favorites.value.contains(_day.value);
+  bool get isFavorite => _favorites.contains(_day.value);
 
   QuotesStore() {
     getPreferences();
@@ -32,6 +32,17 @@ class QuotesStore extends GetxController {
   QuotesStore.random() {
     getPreferences();
     random();
+  }
+
+  /// Return the quote and credits of tomorrow.
+  List<String> get tomorrowsQuote {
+    var _tomorrow = _day.value + 1;
+    if (_tomorrow >= _max) {
+      _tomorrow = 0;
+    }
+    var _quote = _quotes[_tomorrow]['quote'];
+    var _credits = _quotes[_tomorrow]['credits'];
+    return [_quote, _credits];
   }
 
   void quoteOfTheDay() {
@@ -227,27 +238,27 @@ class QuotesStore extends GetxController {
       "link":
           "https://www.vice.com/en_uk/article/ev3e57/how-linda-mccartneys-legacy-lives-on-in-the-modern-vegan-movement"
     },
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
+    {"quote": "I look forward to the day when animals will have the right to run if they have legs, swim if they have fins, and fly if they have wings.", "credits": "Gretchen Wyler", "link": "https://en.wikipedia.org/wiki/Gretchen_Wyler"},
+    {"quote": "Animal liberation is also human liberation. Animal liberationists care about the quality of life for all.", "credits": "Henry Spira", "link": "https://link.springer.com/chapter/10.1007/978-1-4612-5623-6_26"},
+    {"quote": "My perspective of veganism was most affected by learning that the veal calf is a by-product of dairying, and that in essence there is a slice of veal in every glass of what I had thought was an innocuous white liquid – milk.", "credits": "Rynn Berry", "link": "https://www.all-creatures.org/aro/q-berry-rynn.html"},
+    {"quote": "At the moment our human world is based on the suffering and destruction of millions of non-humans. To perceive this and to do something to change it in personal and public ways is to undergo a change of perception akin to a religious conversion.", "credits": "Sir Arthur Conan Doyle", "link": "https://davekjaer.com/index.php/why-vegan/vegan-luminaries/"},
+    {"quote": "My diet is a whole food, plant based or vegan diet. So, basically I want you to eat whole grains, legumes, tonnes of vegetables and fruits, nuts and seeds. No meat whatsoever, and no processed foods. It’s amazing what it can do for your body, and it reduces your risk for chronic disease.", "credits": "Julieanna Hever", "link": "https://plantbaseddietitian.com/"},
+    {"quote": "I made the choice to be vegan because I will not eat (or wear, or use) anything that could have an emotional response to its death or captivity. I can well imagine what that must feel like for our non-human friends – the fear, the terror, the pain – and I will not cause such suffering to a fellow living being.", "credits": "Rai Aren", "link": "https://veganismthebackground.jimdofree.com/"},
+    {"quote": "Basically, the reason I’m vegan is because when I was about 16 or 17 years old, I began to understand that we don’t need to contribute to the killing and exploitation of animals to feed our bodies correctly.", "credits": "Daniel Johns", "link": "https://quotesground.com/authors/Daniel-Johns"},
+    {"quote": "All children should be encouraged to love and respect animals, not turn a blind eye to their suffering and stab forks into their dead bodies.", "credits": "Mango Wodzak", "link": "http://www.fruitnut.net/about-me"},
+    {"quote": "I am grateful to realize that my desires do not entitle me to add to another’s suffering.", "credits": "Zoe Weil", "link": "https://humaneeducation.org/who-we-are/meet-zoe-weil/"},
+    {"quote": "If you think that being vegan is difficult, imagine being a factory farmed animal.", "credits": "Davegan Raza", "link": "https://twitter.com/veganuary/status/1159825407375491077"},
+    {"quote": "If you really care about animals, then stop trying to figure out how to exploit them ‘compassionately’. Just stop exploiting them.", "credits": "Gary Francione", "link": "https://www.abolitionistapproach.com/about/gary-l-francione/"},
+    {"quote": "The question is not, 'Can they reason?' nor, 'Can they talk?' but rather, 'Can they suffer?", "credits": "Jeremy Bentham", "link": "https://speakingofresearch.com/extremism-undone/ar-beliefs/"},
+    {"quote": "The soul is the same in all living creatures, although the body of each is different.", "credits": "Hippocrates", "link": "https://thebark.com/content/soul-all-living-creatures"},
+    {"quote": "Every person I have met who has gone vegan says it is the best decision they have ever made.", "credits": "Lewis Hamilton", "link": "https://www.brainyquote.com/quotes/lewis_hamilton_872365"},
+    {"quote": " became a vegetarian after realizing that animals feel afraid, cold, hungry and unhappy like we do.", "credits": "Cesar Chavez", "link": "https://www.azquotes.com/quote/816227"},
+    {"quote": "A vegan diet is probably the single biggest way to reduce your impact on planet Earth …. It is far bigger than cutting down on your flights or buying an electric car.", "credits": "Joseph Poore", "link": "https://www.ecowatch.com/vegan-earth-footprint-2574241439.html"},
+    {"quote": "Nothing will benefit human health and increase the chances for survival of life on Earth as much as the evolution to a vegetarian diet.", "credits": "Albert Einstein", "link": "https://www.foodandwine.com/cooking-techniques/albert-einstein-genius-birthday-boy-vegetarian-vegan"},
+    {"quote": "One should not kill a living being, nor cause it to be killed, nor should one incite another to kill. Do not injure any being, either strong or weak, in the world.", "credits": "Buddha", "link": "http://www.humanedecisions.com/buddha-said-one-should-not-kill-a-living-being/"},
+    {"quote": "Veganism extends compassionate, gentle benevolence to all sentient beings.", "credits": "Stanley Sapon", "link": "https://ivu.org/congress/wvc96/texts/stanley.html"},
+    {"quote": "Animals are not ingredients.", "credits": "Barbara Thompson", "link": "https://veganposters.com/author/barbara-thompson"},
+    {"quote": "For as long as man continues to be the ruthless destroyer of lower living beings, he will never know health or peace. For as long as men massacre animals, they will kill each other. Indeed, he who sows the seeds of murder and pain cannot reap joy and love.", "credits": "Pythagoras", "link": "https://ivu.org/history/greece_rome/pythagoras.html"},
     {"quote": "", "credits": "", "link": ""},
     {"quote": "", "credits": "", "link": ""},
     {"quote": "", "credits": "", "link": ""},
