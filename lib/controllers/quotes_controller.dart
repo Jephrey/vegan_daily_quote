@@ -17,7 +17,7 @@ class QuotesController extends GetxController {
   String get quote => _quotes[_day.value]['quote'];
   String get credits => _quotes[_day.value]['credits'];
   String get link => _quotes[_day.value]['link'];
-  String get notifcationQuote {
+  String get notificationQuote {
     quoteOfTheDay();
     return _quotes[_day.value]['credits'];
   }
@@ -34,7 +34,7 @@ class QuotesController extends GetxController {
     random();
   }
 
-  /// Return the quote and credits of tomorrow.
+  // Return the quote and credits of tomorrow.
   List<String> get tomorrowsQuote {
     var _tomorrow = _day.value + 1;
     if (_tomorrow >= _max) {
@@ -90,7 +90,7 @@ class QuotesController extends GetxController {
     savePreferences();
   }
 
-  static const _quotes = const [
+  static const _quotes = const <Map>[
     {
       "quote":
           "No animal needs to die in order for me to live. And that makes me feel good.",

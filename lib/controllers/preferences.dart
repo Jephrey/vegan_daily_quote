@@ -8,7 +8,7 @@ class PreferencesController extends GetxController {
   final _prefs = GetStorage();
 
   var _theme = 'system'.obs; // Theme: light, dark, system.
-  var _favorites = [].obs; // List of favorite quotes.
+  var _favorites = <int>[].obs; // List of favorite quotes.
   var _notifications = true.obs; // Notification on or off.
   var _notificationHour = 12.obs; // Hour of notification.
   var _notificationMinute = 0.obs; // Minute of notification.
@@ -32,7 +32,7 @@ class PreferencesController extends GetxController {
   }
 
   // Favorites.
-  get favorites => _favorites;
+  List<int> get favorites => _favorites;
   set favorites(List<int> favorites) {
     _favorites.value = favorites;
     _prefs.write('favList', favorites);

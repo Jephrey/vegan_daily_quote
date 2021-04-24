@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../i18n/quote.i18n.dart';
 
-import 'package:vegan_daily_quote/controllers/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 
 class Quote extends StatelessWidget {
   final QuotesController qs = Get.find<QuotesController>();

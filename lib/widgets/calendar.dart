@@ -25,7 +25,7 @@ class Calender extends StatelessWidget {
               month,
               style: TextStyle(
                 fontSize: 16,
-                color: ThemeData.fallback().textTheme.headline1.color,
+                color: ThemeData.fallback().textTheme.headline1!.color,
                 fontWeight: FontWeight.bold,
               ),
               maxLines: 1,

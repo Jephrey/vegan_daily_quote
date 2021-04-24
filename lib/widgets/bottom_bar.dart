@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
 import '../i18n/bottom_bar.i18n.dart';
 
-import 'package:vegan_daily_quote/controllers/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 
 class BottomBar extends StatelessWidget {
   final QuotesController qs = Get.find();

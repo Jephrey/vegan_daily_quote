@@ -4,7 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:get/get.dart';
 import 'package:vegan_daily_quote/controllers/preferences.dart';
-import 'package:vegan_daily_quote/controllers/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -71,10 +71,8 @@ class Notifications {
     );
   }
 
-  Future onSelectNotification(String payload) async {
-    if (payload != null) {
-      debugPrint('Notification payload: $payload');
-    }
+  Future onSelectNotification(String? payload) async {
+    debugPrint('Notification payload: $payload');
     setNotification(); // Set for next day.
   }
 

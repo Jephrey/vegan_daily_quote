@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:vegan_daily_quote/controllers/preferences.dart';
 import 'package:vegan_daily_quote/widgets/quote.dart';
-import 'package:vegan_daily_quote/controllers/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 
 void main() {
   Get.lazyPut<QuotesController>(() => QuotesController());

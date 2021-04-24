@@ -9,7 +9,7 @@ import 'package:vegan_daily_quote/controllers/theme_controller.dart';
 import '../i18n/settings.i18n.dart';
 
 class SettingsPage extends StatelessWidget {
-  Future<TimeOfDay> selectTime(BuildContext context) async {
+  Future<TimeOfDay?> selectTime(BuildContext context) async {
     return await showTimePicker(
       context: context,
       initialTime: TimeOfDay(
@@ -40,7 +40,7 @@ class SettingsPage extends StatelessWidget {
                 value: ThemeMode.system,
                 groupValue: ThemeController.to.themeMode,
                 onChanged: (value) {
-                  ThemeController.to.setThemeMode(value);
+                  ThemeController.to.setThemeMode(value as ThemeMode);
                 },
               ),
               RadioListTile(
@@ -48,7 +48,7 @@ class SettingsPage extends StatelessWidget {
                 value: ThemeMode.dark,
                 groupValue: ThemeController.to.themeMode,
                 onChanged: (value) {
-                  ThemeController.to.setThemeMode(value);
+                  ThemeController.to.setThemeMode(value as ThemeMode);
                 },
               ),
               RadioListTile(
@@ -56,7 +56,7 @@ class SettingsPage extends StatelessWidget {
                   value: ThemeMode.light,
                   groupValue: ThemeController.to.themeMode,
                   onChanged: (value) {
-                    ThemeController.to.setThemeMode(value);
+                    ThemeController.to.setThemeMode(value as ThemeMode);
                   }),
               Text(
                 'Notifications'.i18n,

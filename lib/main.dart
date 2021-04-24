@@ -6,41 +6,36 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'dart:ui';
 
 import 'package:vegan_daily_quote/widgets/bottom_bar.dart';
 import 'package:vegan_daily_quote/widgets/calendar.dart';
 import 'package:vegan_daily_quote/notifications.dart';
 import 'package:vegan_daily_quote/controllers/preferences.dart';
 import 'package:vegan_daily_quote/widgets/quote.dart';
-import 'package:vegan_daily_quote/controllers/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 import 'package:vegan_daily_quote/pages/settings_page.dart';
 import 'package:vegan_daily_quote/controllers/theme_controller.dart';
 
 import 'i18n/main.i18n.dart';
 
-const MethodChannel platform =
-    MethodChannel('dexterx.dev/flutter_local_notifications_example');
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await _configureLocalTimeZone();
+
+  // Get and set the locale.
+  Intl.defaultLocale = window.locale.languageCode;
+  await initializeDateFormatting(window.locale.countryCode);
 
   await GetStorage.init();
+
   Get.lazyPut<ThemeController>(() => ThemeController());
   Get.lazyPut<QuotesController>(() => QuotesController());
   Get.lazyPut<PreferencesController>(() => PreferencesController());
+
   if (!kIsWeb) Get.put(Notifications());
   runApp(MyApp());
-}
-
-Future<void> _configureLocalTimeZone() async {
-  tz.initializeTimeZones();
-  //final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
-  //debugPrint('Timezone: $currentTimeZone');
-  //tz.setLocalLocation(tz.getLocation(currentTimeZone));
 }
 
 class MyApp extends StatelessWidget {
@@ -71,7 +66,7 @@ class MyApp extends StatelessWidget {
 class MyHome extends StatefulWidget {
   final String title;
 
-  MyHome({Key key, this.title}) : super(key: key);
+  MyHome({Key? key, required this.title}) : super(key: key);
 
   @override
   _MyHomeState createState() => _MyHomeState();
@@ -89,14 +84,14 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChannels.lifecycle.setMessageHandler((msg) {
-      debugPrint('SystemChannels> $msg');
-      if (msg.contains('resumed')) {
-        QuotesController.to.quoteOfTheDay();
-        setState(() {});
-      }
-      return null;
-    });
+    // SystemChannels.lifecycle.setMessageHandler((msg) {
+    //   debugPrint('SystemChannels> $msg');
+    //   if (msg!.contains('resumed')) {
+    //     QuotesController.to.quoteOfTheDay();
+    //     setState(() {});
+    //   }
+    //   return;
+    // });
 
     return Scaffold(
       appBar: AppBar(
@@ -124,8 +119,8 @@ class _MyHomeState extends State<MyHome> {
                 context: context,
                 applicationIcon: const Icon(Icons.calendar_today),
                 applicationName: widget.title,
-                applicationVersion: '0.6.0',
-                applicationLegalese: '©2020 Jeffrey Rüsterholz Ⓥ',
+                applicationVersion: '0.7.0',
+                applicationLegalese: '©2020-2021 Jeffrey Rüsterholz Ⓥ',
               );
             },
           ),
