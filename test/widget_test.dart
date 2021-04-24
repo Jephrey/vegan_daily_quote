@@ -8,13 +8,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-import 'package:vegan_daily_quote/preferences.dart';
-import 'package:vegan_daily_quote/quote.dart';
-import 'package:vegan_daily_quote/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/preferences.dart';
+import 'package:vegan_daily_quote/widgets/quote.dart';
+import 'package:vegan_daily_quote/controllers/quotes_store.dart';
 
 void main() {
-  Get.lazyPut<QuotesStore>(() => QuotesStore());
-  Get.lazyPut<Preferences>(() => Preferences());
+  Get.lazyPut<QuotesController>(() => QuotesController());
+  Get.lazyPut<PreferencesController>(() => PreferencesController());
 
   // Quote should contain text.
   testWidgets('Quote should be created.', (WidgetTester tester) async {

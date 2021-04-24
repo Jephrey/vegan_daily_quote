@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
-import 'i18n/bottom_bar.i18n.dart';
+import '../i18n/bottom_bar.i18n.dart';
 
-import 'package:vegan_daily_quote/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/quotes_store.dart';
 
 class BottomBar extends StatelessWidget {
-  final QuotesStore qs = Get.find();
+  final QuotesController qs = Get.find();
 
   @override
   Widget build(BuildContext context) {

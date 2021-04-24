@@ -10,18 +10,19 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
-import 'package:vegan_daily_quote/bottom_bar.dart';
-import 'package:vegan_daily_quote/calendar.dart';
+import 'package:vegan_daily_quote/widgets/bottom_bar.dart';
+import 'package:vegan_daily_quote/widgets/calendar.dart';
 import 'package:vegan_daily_quote/notifications.dart';
-import 'package:vegan_daily_quote/preferences.dart';
-import 'package:vegan_daily_quote/quote.dart';
-import 'package:vegan_daily_quote/quotes_store.dart';
-import 'package:vegan_daily_quote/settings.dart';
-import 'package:vegan_daily_quote/theme_controller.dart';
+import 'package:vegan_daily_quote/controllers/preferences.dart';
+import 'package:vegan_daily_quote/widgets/quote.dart';
+import 'package:vegan_daily_quote/controllers/quotes_store.dart';
+import 'package:vegan_daily_quote/pages/settings_page.dart';
+import 'package:vegan_daily_quote/controllers/theme_controller.dart';
 
 import 'i18n/main.i18n.dart';
 
-const MethodChannel platform = MethodChannel('dexterx.dev/flutter_local_notifications_example');
+const MethodChannel platform =
+    MethodChannel('dexterx.dev/flutter_local_notifications_example');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +30,8 @@ void main() async {
 
   await GetStorage.init();
   Get.lazyPut<ThemeController>(() => ThemeController());
-  Get.lazyPut<QuotesStore>(() => QuotesStore());
-  Get.lazyPut<Preferences>(() => Preferences());
+  Get.lazyPut<QuotesController>(() => QuotesController());
+  Get.lazyPut<PreferencesController>(() => PreferencesController());
   if (!kIsWeb) Get.put(Notifications());
   runApp(MyApp());
 }
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
 
 class MyHome extends StatefulWidget {
   final String title;
-  
+
   MyHome({Key key, this.title}) : super(key: key);
 
   @override
@@ -77,7 +78,7 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  final QuotesStore qs = Get.put(QuotesStore());
+  final QuotesController qs = Get.put(QuotesController());
 
   @override
   void initState() {
@@ -91,7 +92,7 @@ class _MyHomeState extends State<MyHome> {
     SystemChannels.lifecycle.setMessageHandler((msg) {
       debugPrint('SystemChannels> $msg');
       if (msg.contains('resumed')) {
-        QuotesStore.to.quoteOfTheDay();
+        QuotesController.to.quoteOfTheDay();
         setState(() {});
       }
       return null;
@@ -180,5 +181,3 @@ class _MyHomeState extends State<MyHome> {
     }
   }
 }
-
-

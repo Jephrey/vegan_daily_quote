@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'i18n/quote.i18n.dart';
+import '../i18n/quote.i18n.dart';
 
-import 'package:vegan_daily_quote/quotes_store.dart';
+import 'package:vegan_daily_quote/controllers/quotes_store.dart';
 
 class Quote extends StatelessWidget {
-  final QuotesStore qs = Get.find<QuotesStore>();
+  final QuotesController qs = Get.find<QuotesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,8 @@ class Quote extends StatelessWidget {
         elevation: 4,
         child: InkWell(
           onLongPress: () {
-            final String _link = qs.link.length > 0 ? qs.link : "No link available.".i18n; 
+            final String _link =
+                qs.link.length > 0 ? qs.link : "No link available.".i18n;
             Get.snackbar(
               "Link to quote".i18n,
               _link,
