@@ -79,20 +79,15 @@ class SettingsPage extends StatelessWidget {
                 value: Preferences.to.notificationSoundEnabled,
                 title: Text('Notification Sound'.i18n),
                 onChanged: (value) {
-                  print(value);
                   Preferences.to.notificationSoundEnabled = value;
                 },
               ),
                 Container(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Notification Time: '.i18n +
-                            TimeOfDay(
-                                    hour: Preferences.to.notificationHour,
-                                    minute: Preferences.to.notificationMinute)
-                                .format(context),
+                        'Notification Time: '.i18n,
                       ),
                       FlatButton(
                         onPressed: () {
@@ -108,7 +103,10 @@ class SettingsPage extends StatelessWidget {
                                   }
                               });
                         },
-                        child: Text('Change'.i18n),
+                        child: Text(TimeOfDay(
+                            hour: Preferences.to.notificationHour,
+                            minute: Preferences.to.notificationMinute)
+                            .format(context)),
                       ),
                     ],
                   ),

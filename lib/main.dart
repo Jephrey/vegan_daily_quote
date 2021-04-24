@@ -21,6 +21,8 @@ import 'package:vegan_daily_quote/theme_controller.dart';
 
 import 'i18n/main.i18n.dart';
 
+const MethodChannel platform = MethodChannel('dexterx.dev/flutter_local_notifications_example');
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _configureLocalTimeZone();
@@ -35,9 +37,9 @@ void main() async {
 
 Future<void> _configureLocalTimeZone() async {
   tz.initializeTimeZones();
-  final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
-  debugPrint('Timezone: $currentTimeZone');
-  tz.setLocalLocation(tz.getLocation(currentTimeZone));
+  //final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
+  //debugPrint('Timezone: $currentTimeZone');
+  //tz.setLocalLocation(tz.getLocation(currentTimeZone));
 }
 
 class MyApp extends StatelessWidget {
