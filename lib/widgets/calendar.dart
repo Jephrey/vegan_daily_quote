@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'i18n/calendar.i18n.dart';
+import '../i18n/calendar.i18n.dart';
 
 class Calender extends StatelessWidget {
   @override
@@ -25,7 +25,7 @@ class Calender extends StatelessWidget {
               month,
               style: TextStyle(
                 fontSize: 16,
-                color: ThemeData.fallback().textTheme.headline1.color,
+                color: ThemeData.fallback().textTheme.headline1!.color,
                 fontWeight: FontWeight.bold,
               ),
               maxLines: 1,
@@ -38,9 +38,7 @@ class Calender extends StatelessWidget {
             AutoSizeText(
               day,
               style: TextStyle(
-                  fontSize: 60,
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 60, color: Colors.red, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
               maxFontSize: 70,
             ),

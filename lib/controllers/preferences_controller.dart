@@ -2,19 +2,19 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 // All preferences in one place.
-class Preferences extends GetxController {
-  static Preferences get to => Get.find<Preferences>();
+class PreferencesController extends GetxController {
+  static PreferencesController get to => Get.find<PreferencesController>();
 
   final _prefs = GetStorage();
 
   var _theme = 'system'.obs; // Theme: light, dark, system.
-  var _favorites = [].obs; // List of favorite quotes.
+  var _favorites = <int>[].obs; // List of favorite quotes.
   var _notifications = true.obs; // Notification on or off.
   var _notificationHour = 12.obs; // Hour of notification.
   var _notificationMinute = 0.obs; // Minute of notification.
   var _notificationSoundEnabled = true.obs; // Sound or not.
 
-  Preferences() {
+  PreferencesController() {
     _theme.value = _prefs.read('theme') ?? 'system';
     _favorites.value = _prefs.read('favList') ?? [];
     _notifications.value = _prefs.read('notifications') ?? true;
@@ -32,7 +32,7 @@ class Preferences extends GetxController {
   }
 
   // Favorites.
-  get favorites => _favorites;
+  List<int> get favorites => _favorites;
   set favorites(List<int> favorites) {
     _favorites.value = favorites;
     _prefs.write('favList', favorites);
