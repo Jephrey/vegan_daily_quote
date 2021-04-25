@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-import 'package:vegan_daily_quote/controllers/preferences.dart';
+import 'package:vegan_daily_quote/controllers/preferences_controller.dart';
 import 'package:vegan_daily_quote/widgets/quote.dart';
 import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 

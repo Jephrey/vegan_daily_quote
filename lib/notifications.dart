@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:get/get.dart';
-import 'package:vegan_daily_quote/controllers/preferences.dart';
+import 'package:vegan_daily_quote/controllers/preferences_controller.dart';
 import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 
 import 'package:timezone/data/latest.dart' as tz;

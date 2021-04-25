@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
 
-import 'package:vegan_daily_quote/controllers/preferences.dart';
+import 'package:vegan_daily_quote/controllers/preferences_controller.dart';
 
 class QuotesController extends GetxController {
   static QuotesController get to => Get.find<QuotesController>();

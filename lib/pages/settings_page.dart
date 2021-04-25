@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegan_daily_quote/notifications.dart';
-import 'package:vegan_daily_quote/controllers/preferences.dart';
+import 'package:vegan_daily_quote/controllers/preferences_controller.dart';
 
 import 'package:vegan_daily_quote/controllers/theme_controller.dart';
 
