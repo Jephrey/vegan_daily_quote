@@ -9,7 +9,7 @@ import '../i18n/bottom_bar.i18n.dart';
 import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 
 class BottomBar extends StatelessWidget {
-  final QuotesController qs = Get.find();
+  final QuotesController qs = QuotesController.to;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class BottomBar extends StatelessWidget {
       children: [
         Tooltip(
           message: 'Copy Quote'.i18n,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {
               // Copy quote, credits and link to the clipboard.
               Clipboard.setData(new ClipboardData(
@@ -40,9 +40,9 @@ class BottomBar extends StatelessWidget {
         if (!kIsWeb)
           Tooltip(
             message: 'Share Quote'.i18n,
-            child: FlatButton(
+            child: TextButton(
               onPressed: () {
-                Share.share('${qs.quote}\n${qs.credits}\n',
+                Share.share('"${qs.quote}"\n~ ${qs.credits} ~\n',
                     subject: 'Vegan Daily Quote');
               },
               child: Icon(Icons.share),
@@ -51,7 +51,7 @@ class BottomBar extends StatelessWidget {
         Tooltip(
           message: 'Open link'.i18n,
           child: Obx(
-            () => FlatButton(
+            () => TextButton(
               // Enable button if there is a link. Null disables the button.
               onPressed: qs.link.length > 0
                   ? () async =>
@@ -63,7 +63,7 @@ class BottomBar extends StatelessWidget {
         ),
         Tooltip(
           message: 'Toggle favorite'.i18n,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {
               qs.toggleFavorite();
             },
@@ -71,7 +71,6 @@ class BottomBar extends StatelessWidget {
               () => qs.isFavorite
                   ? Icon(
                       Icons.favorite,
-                      color: Colors.red,
                     )
                   : Icon(
                       Icons.favorite_border,

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vegan_daily_quote/notifications.dart';
+import 'package:vegan_daily_quote/controllers/notification_controller.dart';
 import 'package:vegan_daily_quote/controllers/preferences_controller.dart';
 
 import 'package:vegan_daily_quote/controllers/theme_controller.dart';
@@ -69,9 +69,9 @@ class SettingsPage extends StatelessWidget {
                 onChanged: (value) {
                   PreferencesController.to.notifications = value;
                   if (value) {
-                    Notifications.to.setNotification();
+                    NotificationController.to.setNotification();
                   } else {
-                    Notifications.to.cancelAll();
+                    NotificationController.to.cancelAll();
                   }
                 },
               ),
@@ -98,7 +98,7 @@ class SettingsPage extends StatelessWidget {
                                       time.hour,
                                   PreferencesController.to.notificationMinute =
                                       time.minute,
-                                  Notifications.to.setNotification(),
+                                  NotificationController.to.setNotification(),
                                   debugPrint(
                                       'Time set: ${time.hour}:${time.minute}')
                                 }

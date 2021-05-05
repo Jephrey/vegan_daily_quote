@@ -324,7 +324,7 @@ class QuotesController extends GetxController {
     },
     {
       "quote":
-          " became a vegetarian after realizing that animals feel afraid, cold, hungry and unhappy like we do.",
+          "In 1968, I became a vegetarian after realizing that animals feel afraid, cold, hungry, and unhappy like we do.I became a vegetarian after realizing that animals feel afraid, cold, hungry and unhappy like we do.",
       "credits": "Cesar Chavez",
       "link": "https://www.azquotes.com/quote/816227"
     },
@@ -365,9 +365,26 @@ class QuotesController extends GetxController {
       "credits": "Pythagoras",
       "link": "https://ivu.org/history/greece_rome/pythagoras.html"
     },
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
-    {"quote": "", "credits": "", "link": ""},
+    {
+      "quote":
+          "If you don’t want to be beaten, imprisoned, mutilated, killed or tortured, then you shouldn’t condone such behavior towards anyone, be they human or not.",
+      "credits": "Moby",
+      "link": "https://www.livekindly.co/who-is-moby-vegan/"
+    },
+    {
+      "quote":
+          "Non-violence leads to the highest ethics, which is the goal of all evolution. Until we stop harming all other living beings, we are still savages.",
+      "credits": "Thomas Edison",
+      "link":
+          "https://freeinfoworld.com/non-violence-leads-to-the-highest-ethics/"
+    },
+    {
+      "quote":
+          "People eat meat and think they will become as strong as an ox, forgetting that the ox eats grass.",
+      "credits": "Pino Caruso",
+      "link":
+          "https://www.barrypopik.com/index.php/new_york_city/entry/people_eat_meat_and_think/"
+    },
     {"quote": "", "credits": "", "link": ""},
     {"quote": "", "credits": "", "link": ""},
     {"quote": "", "credits": "", "link": ""},

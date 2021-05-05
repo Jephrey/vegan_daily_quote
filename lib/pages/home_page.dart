@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final QuotesController qs = Get.put(QuotesController());
+    final QuotesController qs = QuotesController.to;
 
     // SystemChannels.lifecycle.setMessageHandler((msg) {
     //   debugPrint('SystemChannels> $msg');

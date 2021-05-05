@@ -9,8 +9,8 @@ import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-class Notifications {
-  static Notifications get to => Get.find<Notifications>();
+class NotificationController {
+  static NotificationController get to => Get.find<NotificationController>();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -76,7 +76,7 @@ class Notifications {
     setNotification(); // Set for next day.
   }
 
-  Notifications() {
+  NotificationController() {
     const initializationSettingsAndroid =
         AndroidInitializationSettings('notification');
     final initializationSettings =

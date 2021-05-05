@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:vegan_daily_quote/pages/home_page.dart';
 import 'dart:ui';
 
-import 'package:vegan_daily_quote/notifications.dart';
+import 'package:vegan_daily_quote/controllers/notification_controller.dart';
 import 'package:vegan_daily_quote/controllers/preferences_controller.dart';
 import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 import 'package:vegan_daily_quote/controllers/theme_controller.dart';
@@ -24,7 +24,7 @@ void main() async {
   Get.lazyPut<QuotesController>(() => QuotesController());
   Get.lazyPut<PreferencesController>(() => PreferencesController());
 
-  if (!kIsWeb) Get.put(Notifications());
+  if (!kIsWeb) Get.put(NotificationController());
   runApp(MyApp());
 }
 

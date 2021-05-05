@@ -6,7 +6,7 @@ import '../i18n/quote.i18n.dart';
 import 'package:vegan_daily_quote/controllers/quotes_controller.dart';
 
 class Quote extends StatelessWidget {
-  final QuotesController qs = Get.find<QuotesController>();
+  final QuotesController qc = QuotesController.to;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class Quote extends StatelessWidget {
         child: InkWell(
           onLongPress: () {
             final String _link =
-                qs.link.length > 0 ? qs.link : "No link available.".i18n;
+                qc.link.length > 0 ? qc.link : "No link available.".i18n;
             Get.snackbar(
               "Link to quote".i18n,
               _link,
@@ -36,7 +36,7 @@ class Quote extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Obx(() => AutoSizeText(
-                        qs.quote,
+                        qc.quote,
                         minFontSize: 12,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 24),
@@ -49,7 +49,7 @@ class Quote extends StatelessWidget {
                   flex: 1,
                   child: Center(
                     child: Text(
-                      '~ ${qs.credits} ~',
+                      '~ ${qc.credits} ~',
                       style:
                           TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
                     ),
